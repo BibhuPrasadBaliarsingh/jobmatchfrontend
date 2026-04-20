@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const BACKEND_URL = 'https://jobmatchbackend-okz8.onrender.com/api';
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: BACKEND_URL,
   timeout: 15000,
   headers: { 'Content-Type': 'application/json' },
 });
