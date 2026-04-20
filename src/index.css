@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply bg-ink-50 text-ink-900 font-sans antialiased;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold leading-tight tracking-tight;
+  }
+
+  input, textarea, select {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  /* Layout */
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-2xl shadow-card border border-ink-100/60;
+  }
+
+  .card-hover {
+    @apply card transition-all duration-200 hover:shadow-hover hover:-translate-y-0.5;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-medium rounded-xl
+           transition-all duration-150 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-ink-900 text-white hover:bg-ink-800 px-5 py-2.5 text-sm;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-ink-800 border border-ink-200 hover:bg-ink-50 hover:border-ink-300 px-5 py-2.5 text-sm;
+  }
+
+  .btn-sage {
+    @apply btn bg-sage-600 text-white hover:bg-sage-700 px-5 py-2.5 text-sm;
+  }
+
+  .btn-coral {
+    @apply btn bg-coral-500 text-white hover:bg-coral-600 px-5 py-2.5 text-sm;
+  }
+
+  .btn-ghost {
+    @apply btn text-ink-600 hover:text-ink-900 hover:bg-ink-100 px-3 py-2 text-sm;
+  }
+
+  .btn-sm {
+    @apply px-3.5 py-1.5 text-xs;
+  }
+
+  .btn-lg {
+    @apply px-7 py-3.5 text-base;
+  }
+
+  /* Form inputs */
+  .input {
+    @apply w-full px-3.5 py-2.5 rounded-xl border border-ink-200 bg-white text-ink-900
+           placeholder-ink-400 text-sm
+           focus:outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent
+           transition-all duration-150 shadow-inset-sm;
+  }
+
+  .input-error {
+    @apply border-coral-400 focus:ring-coral-400;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-ink-700 mb-1.5;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-sage    { @apply badge bg-sage-100 text-sage-800; }
+  .badge-amber   { @apply badge bg-amber-100 text-amber-800; }
+  .badge-coral   { @apply badge bg-coral-100 text-coral-700; }
+  .badge-ink     { @apply badge bg-ink-100 text-ink-700; }
+  .badge-green   { @apply badge bg-green-100 text-green-800; }
+
+  /* Sidebar */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium
+           text-ink-500 hover:text-ink-900 hover:bg-ink-100 transition-all duration-150 cursor-pointer;
+  }
+
+  .sidebar-link-active {
+    @apply sidebar-link text-ink-900 bg-ink-100;
+  }
+
+  /* Stat cards */
+  .stat-card {
+    @apply card p-5 flex items-start gap-4;
+  }
+
+  /* Skill tag */
+  .skill-tag {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-sage-50
+           text-sage-800 text-xs font-medium border border-sage-200;
+  }
+
+  /* Score ring */
+  .score-ring {
+    @apply inline-flex items-center justify-center w-12 h-12 rounded-full
+           text-sm font-bold font-mono border-2;
+  }
+
+  /* Divider */
+  .divider {
+    @apply border-t border-ink-100;
+  }
+
+  /* Empty state */
+  .empty-state {
+    @apply flex flex-col items-center justify-center py-16 text-center;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-ink-900 to-ink-600 bg-clip-text text-transparent;
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { @apply bg-ink-200 rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-ink-300; }
+
+/* Toast overrides */
+.react-hot-toast > div { font-family: 'DM Sans', sans-serif !important; font-size: 14px !important; }
