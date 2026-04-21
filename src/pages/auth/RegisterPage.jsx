@@ -53,9 +53,9 @@ export default function RegisterPage() {
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-6">
             <div className="w-8 h-8 bg-ink-900 rounded-lg flex items-center justify-center">
-              <span className="text-white font-display font-bold text-sm">JM</span>
+              <span className="text-white font-display font-bold text-sm">SDS</span>
             </div>
-            <span className="font-display font-bold text-ink-900 text-lg">JobMatch</span>
+            <span className="font-display font-bold text-ink-900 text-lg">Super Deals Staffing</span>
           </Link>
           <h2 className="font-display text-3xl font-bold text-ink-900">Create an account</h2>
           <p className="text-ink-500 text-sm mt-1">Join the platform that matches talent with opportunity.</p>

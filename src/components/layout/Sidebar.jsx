@@ -54,11 +54,11 @@ export default function Sidebar({ children }) {
       {/* Logo */}
       <div className={`flex items-center gap-3 px-4 py-5 border-b border-ink-100 ${collapsed ? 'justify-center' : ''}`}>
         <div className="w-8 h-8 bg-ink-900 rounded-lg flex items-center justify-center flex-shrink-0">
-          <span className="text-white font-display font-bold text-sm">JM</span>
+          <span className="text-white font-display font-bold text-sm">SDS</span>
         </div>
         {!collapsed && (
           <div>
-            <span className="font-display font-bold text-ink-900 text-base tracking-tight">JobMatch</span>
+            <span className="font-display font-bold text-ink-900 text-base tracking-tight">Super Deals Staffing</span>
           </div>
         )}
       </div>
@@ -151,9 +151,9 @@ export default function Sidebar({ children }) {
           </button>
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-ink-900 rounded-md flex items-center justify-center">
-              <span className="text-white font-display font-bold text-xs">JM</span>
+              <span className="text-white font-display font-bold text-xs">SDS</span>
             </div>
-            <span className="font-display font-bold text-ink-900">JobMatch</span>
+            <span className="font-display font-bold text-ink-900">Super Deals Staffing</span>
           </div>
           <div className="w-8" />
         </header>

@@ -43,16 +43,16 @@ export default function LoginPage() {
         <div className="relative z-10">
           <Link to="/" className="flex items-center gap-2.5">
             <div className="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center">
-              <span className="text-white font-display font-bold">JM</span>
+              <span className="text-white font-display font-bold">SDS</span>
             </div>
-            <span className="text-white font-display font-bold text-xl">JobMatch</span>
+            <span className="text-white font-display font-bold text-xl">Super Deals Staffing</span>
           </Link>
         </div>
         <div className="relative z-10">
           <blockquote className="text-white/80 text-lg leading-relaxed font-light italic mb-4">
             "The right opportunity doesn't always find you — we make sure it does."
           </blockquote>
-          <p className="text-white/40 text-sm">— JobMatch Platform</p>
+          <p className="text-white/40 text-sm">— Super Deals Staffing Platform</p>
         </div>
         {/* Decorative */}
         <div className="absolute top-0 right-0 w-80 h-80 bg-sage-600/10 rounded-full -translate-y-1/2 translate-x-1/2" />
@@ -68,7 +68,7 @@ export default function LoginPage() {
               <div className="w-8 h-8 bg-ink-900 rounded-lg flex items-center justify-center">
                 <span className="text-white font-display font-bold text-sm">JM</span>
               </div>
-              <span className="font-display font-bold text-ink-900 text-lg">JobMatch</span>
+              <span className="font-display font-bold text-ink-900 text-lg">Super Deals Staffing</span>
             </Link>
           </div>
 

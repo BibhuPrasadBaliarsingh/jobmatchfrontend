@@ -9,9 +9,9 @@ export default function LandingPage() {
       <nav className="flex items-center justify-between px-6 lg:px-16 py-5 border-b border-ink-100">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 bg-ink-900 rounded-lg flex items-center justify-center">
-            <span className="text-white font-display font-bold text-sm">JM</span>
+            <span className="text-white font-display font-bold text-sm">SDS</span>
           </div>
-          <span className="font-display font-bold text-ink-900 text-lg">JobMatch</span>
+          <span className="font-display font-bold text-ink-900 text-lg">Super Deals Staffing</span>
         </div>
         <div className="flex items-center gap-3">
           <Link to="/login" className="btn-secondary btn-sm">Sign in</Link>
@@ -33,7 +33,7 @@ export default function LandingPage() {
         </h1>
 
         <p className="text-ink-500 text-lg lg:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          JobMatch intelligently connects job seekers with the right opportunities — and recruiters with the right candidates — through admin-driven, skill-first matching.
+          Super Deals Staffing intelligently connects job seekers with the right opportunities — and recruiters with the right candidates — through admin-driven, skill-first matching.
         </p>
 
         <div className="flex items-center justify-center gap-4">
@@ -123,7 +123,7 @@ export default function LandingPage() {
 
       {/* Footer */}
       <footer className="border-t border-ink-100 px-6 py-8 text-center text-sm text-ink-400">
-        © {new Date().getFullYear()} JobMatch. Built with MERN stack.
+        © {new Date().getFullYear()} Super Deals Staffing. Built with MERN stack.
       </footer>
     </div>
   );
