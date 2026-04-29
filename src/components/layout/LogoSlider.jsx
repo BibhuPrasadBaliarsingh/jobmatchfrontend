@@ -28,13 +28,7 @@ export default function LogoSlider() {
           </div>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {companies.map((company) => (
-            <div key={company.name} className="flex h-20 items-center justify-center rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-card">
-              <img src={company.logo} alt={company.name} className="h-10 object-contain" />
-            </div>
-          ))}
-        </div>
+        
       </div>
     </section>
   );
