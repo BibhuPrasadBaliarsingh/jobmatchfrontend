@@ -52,8 +52,8 @@ export default function RegisterPage() {
         {/* Header */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-8 h-8 bg-ink-900 rounded-lg flex items-center justify-center">
-              <span className="text-white font-display font-bold text-sm">SDS</span>
+            <div className="w-15 h-15 bg-white rounded-lg flex items-center justify-center">
+              <img src="/logo.PNG" alt="Super Deals" className="h-11 w-11 object-cover" />
             </div>
             <span className="font-display font-bold text-ink-900 text-lg">Super Deals Staffing</span>
           </Link>

@@ -1,130 +1,134 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Zap, Users, Briefcase, CheckCircle } from 'lucide-react';
+import { Zap } from 'lucide-react';
+import Navbar from '../components/layout/Navbar';
+import Footer from '../components/layout/Footer';
+import LogoSlider from '../components/layout/LogoSlider';
+import JobCard from '../components/layout/JobCard';
+import { useAuth } from '../context/AuthContext';
+
+const jobs = [
+  {
+    company: 'Elevate Tech',
+    title: 'Senior Product Designer',
+    salary: '₹18L - ₹24L/yr',
+    location: 'Bhubaneswar',
+    qualification: 'B.Des / Design',
+    experience: '5+ years',
+    logo: 'https://media.licdn.com/dms/image/v2/D560BAQFFvoobar7g0w/company-logo_200_200/B56Z2WJ2WwIYAI-/0/1776340659574/elevate_tech_india_pvt_ltd_logo?e=2147483647&v=beta&t=2UfEsQLAllYckK8A16oraDqm1-VAcmK1FO8vvvhnIDE',
+  },
+  {
+    company: 'RedPeak Solutions',
+    title: 'Full Stack Engineer',
+    salary: '₹15L - ₹20L/yr',
+    location: 'Bengaluru',
+    qualification: 'B.Tech / MCA',
+    experience: '3+ years',
+    logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8ao-tErXIs4_156e23tl4u48n7hrCjt3uRw&s',
+  },
+  {
+    company: 'Nova Labs',
+    title: 'Growth Marketing Lead',
+    salary: '₹12L - ₹16L/yr',
+    location: 'Mumbai',
+    qualification: 'MBA / Marketing',
+    experience: '4+ years',
+    logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH9CQ7grzCnp22JU502KJHEU8V8nQpOqptQQ&s',
+  },
+  {
+    company: 'PivotWorks',
+    title: 'Data Analyst',
+    salary: '₹9L - ₹12L/yr',
+    location: 'Hyderabad',
+    qualification: 'B.Sc / B.Tech',
+    experience: '2+ years',
+    logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdayKPDZR3NE8cHH9hNDQJneZE4T8XUhPegA&s',
+  },
+  {
+    company: 'Summit Health',
+    title: 'HR Business Partner',
+    salary: '₹11L - ₹14L/yr',
+    location: 'Odisha',
+    qualification: 'MBA / HR',
+    experience: '4+ years',
+    logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROGfE-GvrF8hiAWc3_gPvb1aSN3GgwC6-duQ&s',
+  },
+  {
+    company: 'CodaEdge',
+    title: 'Cloud Operations Engineer',
+    salary: '₹13L - ₹17L/yr',
+    location: 'Pune',
+    qualification: 'B.Tech / AWS cert',
+    experience: '3+ years',
+    logo: 'https://www.codedgeacademy.com/logoheader.png',
+  },
+];
 
 export default function LandingPage() {
+  const { user } = useAuth();
+  const uploadResumeLink = user?.role === 'seeker' ? '/seeker/profile' : '/register?role=seeker';
+
   return (
-    <div className="min-h-screen bg-white font-sans">
-      {/* Nav */}
-      <nav className="flex items-center justify-between px-6 lg:px-16 py-5 border-b border-ink-100">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 bg-ink-900 rounded-lg flex items-center justify-center">
-            <span className="text-white font-display font-bold text-sm">SDS</span>
-          </div>
-          <span className="font-display font-bold text-ink-900 text-lg">Super Deals Staffing</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <Link to="/login" className="btn-secondary btn-sm">Sign in</Link>
-          <Link to="/register" className="btn-primary btn-sm">Get started</Link>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+      <Navbar />
 
-      {/* Hero */}
-      <section className="px-6 lg:px-16 pt-20 pb-24 max-w-5xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-sage-50 border border-sage-200 rounded-full text-xs font-medium text-sage-800 mb-8">
-          <Zap size={12} />
-          Skill-based intelligent matching
-        </div>
-
-        <h1 className="font-display text-5xl lg:text-7xl font-bold text-ink-900 leading-[1.05] tracking-tight mb-6 text-balance">
-          Where talent meets
-          <br />
-          <span className="text-sage-600">opportunity</span>
-        </h1>
-
-        <p className="text-ink-500 text-lg lg:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          Super Deals Staffing intelligently connects job seekers with the right opportunities — and recruiters with the right candidates — through admin-driven, skill-first matching.
-        </p>
-
-        <div className="flex items-center justify-center gap-4">
-          <Link to="/register?role=seeker" className="btn-primary btn-lg">
-            Find a job <ArrowRight size={18} />
-          </Link>
-          <Link to="/register?role=recruiter" className="btn-secondary btn-lg">
-            Hire talent
-          </Link>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="px-6 lg:px-16 py-20 bg-ink-50 border-y border-ink-100">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="font-display text-3xl font-bold text-center text-ink-900 mb-12">How it works</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: Users,
-                title: 'Build your profile',
-                desc: 'Seekers add skills, experience, and preferred roles. Recruiters post their job requirements.',
-                color: 'bg-sage-50 text-sage-600',
-              },
-              {
-                icon: Zap,
-                title: 'Admin matches',
-                desc: 'Our admin reviews profiles and jobs, runs the matching algorithm, and sends curated matches.',
-                color: 'bg-amber-50 text-amber-600',
-              },
-              {
-                icon: Briefcase,
-                title: 'Both sides decide',
-                desc: 'Seekers accept or decline opportunities. Recruiters accept or reject candidates. Hiring happens.',
-                color: 'bg-coral-50 text-coral-600',
-              },
-            ].map(({ icon: Icon, title, desc, color }) => (
-              <div key={title} className="card p-6">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${color}`}>
-                  <Icon size={20} />
-                </div>
-                <h3 className="font-display font-semibold text-ink-900 text-lg mb-2">{title}</h3>
-                <p className="text-ink-500 text-sm leading-relaxed">{desc}</p>
+      <main className="space-y-24">
+        <section className="bg-slate-50 dark:bg-slate-950">
+          <div className="page-container grid gap-10 items-center py-20 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-2 text-sm font-semibold text-primary-700 shadow-sm">
+                <Zap size={16} />
+                Smart job matching across multiple industries
               </div>
+
+              <div className="space-y-5 max-w-2xl">
+                <h1 className="font-display text-5xl md:text-6xl font-bold tracking-tight text-slate-950 dark:text-slate-50 leading-tight">
+                  Find Your Perfect Job Match
+                </h1>
+                <p className="text-lg leading-8 text-slate-600 dark:text-slate-300">
+                  Smart job matching across multiple industries. Connect with top employers, track your applications, and land roles that fit your experience.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <Link to={uploadResumeLink} className="btn-primary btn-lg w-full sm:w-auto">
+                  Upload Resume
+                </Link>
+                <Link to="/seeker/opportunities" className="btn-outline btn-lg w-full sm:w-auto">
+                  Browse Jobs
+                </Link>
+              </div>
+            </div>
+
+            <div className="rounded-[2rem] bg-white p-6 shadow-card ring-1 ring-slate-100">
+              <img
+                src="/job-match.png"
+                alt="Job search illustration"
+                className="h-full w-full rounded-[1.5rem] object-cover"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="page-container">
+          <div className="mb-10 text-center">
+            <p className="text-sm uppercase tracking-[0.28em] text-primary-600">Open roles for top talent</p>
+            <h2 className="mt-4 text-3xl md:text-4xl font-display font-bold text-slate-950">
+              Featured openings that match your ambitions
+            </h2>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {jobs.map((job) => (
+              <JobCard key={`${job.company}-${job.title}`} job={job} />
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Roles */}
-      <section className="px-6 lg:px-16 py-20 max-w-5xl mx-auto">
-        <h2 className="font-display text-3xl font-bold text-center text-ink-900 mb-12">Built for everyone</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {/* Seeker card */}
-          <div className="card p-8 border-sage-200">
-            <h3 className="font-display font-bold text-xl text-ink-900 mb-2">Job Seekers</h3>
-            <p className="text-ink-500 text-sm mb-5">Create your profile once and let matched opportunities come to you.</p>
-            <ul className="space-y-2.5 mb-6">
-              {['Build a rich skill profile', 'Receive curated job matches', 'Accept or decline opportunities', 'Track application status'].map(f => (
-                <li key={f} className="flex items-center gap-2.5 text-sm text-ink-700">
-                  <CheckCircle size={15} className="text-sage-600 flex-shrink-0" /> {f}
-                </li>
-              ))}
-            </ul>
-            <Link to="/register?role=seeker" className="btn-sage w-full justify-center">
-              Join as a Seeker
-            </Link>
-          </div>
+        <LogoSlider />
+      </main>
 
-          {/* Recruiter card */}
-          <div className="card p-8 border-amber-200">
-            <h3 className="font-display font-bold text-xl text-ink-900 mb-2">Recruiters</h3>
-            <p className="text-ink-500 text-sm mb-5">Post requirements and receive pre-screened, skill-matched candidates.</p>
-            <ul className="space-y-2.5 mb-6">
-              {['Post detailed job requirements', 'Receive matched candidate profiles', 'Accept or shortlist candidates', 'Manage all roles in one place'].map(f => (
-                <li key={f} className="flex items-center gap-2.5 text-sm text-ink-700">
-                  <CheckCircle size={15} className="text-amber-600 flex-shrink-0" /> {f}
-                </li>
-              ))}
-            </ul>
-            <Link to="/register?role=recruiter" className="btn-primary w-full justify-center">
-              Join as a Recruiter
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-ink-100 px-6 py-8 text-center text-sm text-ink-400">
-        © {new Date().getFullYear()} Super Deals Staffing. Built with MERN stack.
-      </footer>
+      <Footer />
     </div>
   );
 }

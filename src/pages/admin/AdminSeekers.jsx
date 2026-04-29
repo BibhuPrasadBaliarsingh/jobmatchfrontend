@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import Sidebar from '../../components/layout/Sidebar';
 import { PageHeader, SkillTags, Pagination, SectionLoader, EmptyState } from '../../components/common/UI';
 import { adminApi } from '../../services/api';
-import { Users, Search, Mail, MapPin, ToggleLeft, ToggleRight } from 'lucide-react';
+import { Users, Search, Mail, MapPin, ToggleLeft, ToggleRight, FileText, ExternalLink } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import toast from 'react-hot-toast';
 
@@ -68,6 +68,17 @@ export default function AdminSeekers() {
                           {seeker.location && <span className="flex items-center gap-1"><MapPin size={11} />{seeker.location}</span>}
                           <span className="font-mono">{seeker.experienceYears} yrs exp</span>
                           <span>Joined {formatDistanceToNow(new Date(seeker.createdAt), { addSuffix: true })}</span>
+                          {seeker.resumeUrl && (
+                            <a
+                              href={seeker.resumeUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-1 text-sage-700 hover:text-sage-800 font-medium"
+                              title="Open resume"
+                            >
+                              <FileText size={12} /> Resume <ExternalLink size={12} />
+                            </a>
+                          )}
                         </div>
                         {seeker.skills?.length > 0 && <SkillTags skills={seeker.skills} max={6} />}
                       </div>

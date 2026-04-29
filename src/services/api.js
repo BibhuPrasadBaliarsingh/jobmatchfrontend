@@ -37,6 +37,7 @@ export const seekerApi = {
   getDashboard: () => api.get('/seeker/dashboard'),
   updateProfile: (data) => api.put('/seeker/profile', data),
   respondToMatch: (matchId, status) => api.put(`/seeker/matches/${matchId}/respond`, { status }),
+  uploadResume: (payload) => api.post('/seeker/resume', payload),
 };
 
 // ─── Recruiter API ────────────────────────────────────────────────────────────

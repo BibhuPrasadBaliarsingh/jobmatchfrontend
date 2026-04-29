@@ -30,6 +30,7 @@ import AdminMatchEngine from './pages/admin/AdminMatchEngine';
 import NotFound from './pages/NotFound';
 import LandingPage from './pages/LandingPage';
 import LoadingScreen from './components/common/LoadingScreen';
+import ThemeToggle from './components/common/ThemeToggle';
 
 // ─── Route Guards ─────────────────────────────────────────────────────────────
 const PrivateRoute = ({ children, role }) => {
@@ -83,6 +84,7 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <AppRoutes />
+        <ThemeToggle />
         <Toaster
           position="top-right"
           toastOptions={{

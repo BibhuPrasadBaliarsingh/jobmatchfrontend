@@ -3,7 +3,7 @@ import Sidebar from '../../components/layout/Sidebar';
 import { PageHeader, InputField, SkillInput, Spinner } from '../../components/common/UI';
 import { seekerApi } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
-import { User, MapPin, Phone, Briefcase, FileText, Star } from 'lucide-react';
+import { User, MapPin, Phone, Briefcase, FileText, Star, Upload, ExternalLink, Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const JOB_ROLES = ['Frontend Developer', 'Backend Developer', 'Full Stack Developer', 'Data Scientist', 'DevOps Engineer', 'Product Manager', 'UI/UX Designer', 'Mobile Developer', 'Data Analyst', 'QA Engineer', 'Security Engineer', 'ML Engineer', 'Watchman', 'Driver', 'Accountant', 'HR Manager', 'Sales Executive'];
@@ -15,6 +15,8 @@ export default function SeekerProfile() {
     skills: [], experienceYears: 0, experienceDescription: '', preferredRoles: [],
   });
   const [loading, setLoading] = useState(false);
+  const [resumeFile, setResumeFile] = useState(null);
+  const [uploadingResume, setUploadingResume] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -64,6 +66,41 @@ export default function SeekerProfile() {
     }
   };
 
+  const handleUploadResume = async () => {
+    if (!resumeFile) return toast.error('Please choose a resume file first.');
+    setUploadingResume(true);
+    try {
+      const dataBase64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const result = String(reader.result || '');
+          const base64 = result.includes(',') ? result.split(',')[1] : result;
+          resolve(base64);
+        };
+        reader.onerror = () => reject(new Error('Failed to read file'));
+        reader.readAsDataURL(resumeFile);
+      });
+
+      const res = await seekerApi.uploadResume({
+        fileName: resumeFile.name,
+        mimeType: resumeFile.type || (
+          resumeFile.name?.toLowerCase?.().endsWith('.pdf') ? 'application/pdf'
+            : resumeFile.name?.toLowerCase?.().endsWith('.docx') ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+              : resumeFile.name?.toLowerCase?.().endsWith('.doc') ? 'application/msword'
+                : ''
+        ),
+        dataBase64,
+      });
+      updateUser(res.data.data);
+      setResumeFile(null);
+      toast.success('Resume uploaded!');
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Resume upload failed');
+    } finally {
+      setUploadingResume(false);
+    }
+  };
+
   return (
     <Sidebar>
       <div className="p-6 lg:p-8 max-w-3xl mx-auto">
@@ -93,6 +130,53 @@ export default function SeekerProfile() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Resume */}
+          <div className="card p-6">
+            <h2 className="font-display font-semibold text-ink-900 mb-2 flex items-center gap-2">
+              <FileText size={18} /> Resume
+            </h2>
+            <p className="text-ink-500 text-xs mb-4">Upload a PDF/DOC/DOCX resume (max 5MB). It will be visible in the admin panel.</p>
+
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                onChange={(e) => setResumeFile(e.target.files?.[0] || null)}
+                className="block w-full text-sm text-ink-600 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-medium file:bg-ink-900 file:text-white hover:file:bg-ink-800"
+              />
+              <button
+                type="button"
+                onClick={handleUploadResume}
+                disabled={uploadingResume || !resumeFile}
+                className="btn-primary btn-sm inline-flex items-center justify-center gap-2"
+              >
+                {uploadingResume ? <Spinner /> : <><Upload size={14} /> Upload</>}
+              </button>
+              <button
+                type="button"
+                onClick={() => setResumeFile(null)}
+                disabled={!resumeFile || uploadingResume}
+                className="btn-secondary btn-sm inline-flex items-center justify-center gap-2"
+                title="Clear selected file"
+              >
+                <Trash2 size={14} /> Clear
+              </button>
+            </div>
+
+            {user?.resumeUrl && (
+              <div className="mt-4 text-sm">
+                <a
+                  href={user.resumeUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-sage-700 hover:text-sage-800 font-medium"
+                >
+                  View current resume <ExternalLink size={14} />
+                </a>
+              </div>
+            )}
+          </div>
+
           {/* Basic info */}
           <div className="card p-6">
             <h2 className="font-display font-semibold text-ink-900 mb-5 flex items-center gap-2">

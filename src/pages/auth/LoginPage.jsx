@@ -40,24 +40,42 @@ export default function LoginPage() {
     <div className="min-h-screen bg-ink-50 flex">
       {/* Left panel */}
       <div className="hidden lg:flex flex-col justify-between w-2/5 bg-ink-900 p-12 relative overflow-hidden">
-        <div className="relative z-10">
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-white/10 rounded-xl flex items-center justify-center">
-              <span className="text-white font-display font-bold">SDS</span>
-            </div>
-            <span className="text-white font-display font-bold text-xl">Super Deals Staffing</span>
-          </Link>
-        </div>
-        <div className="relative z-10">
-          <blockquote className="text-white/80 text-lg leading-relaxed font-light italic mb-4">
-            "The right opportunity doesn't always find you — we make sure it does."
-          </blockquote>
-          <p className="text-white/40 text-sm">— Super Deals Staffing Platform</p>
-        </div>
-        {/* Decorative */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-sage-600/10 rounded-full -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-60 h-60 bg-amber-500/10 rounded-full translate-y-1/2 -translate-x-1/2" />
+
+  {/* Top Logo */}
+  <div className="relative z-10">
+    <Link to="/" className="flex items-center gap-2.5">
+      <div className="w-15 h-15 bg-white rounded-xl flex items-center justify-center">
+        <img src="/logo.PNG" alt="Super Deals" className="h-11 w-11 object-cover" />
       </div>
+      <span className="text-white font-display font-bold text-xl">
+        Super Deals Staffing
+      </span>
+    </Link>
+  </div>
+
+  {/* 🔥 CENTER IMAGE (ADD THIS) */}
+  <div className="relative z-10 flex justify-center items-center my-10">
+    <img
+      src="/job-match.png"
+      alt="Job Matching Illustration"
+      className="w-100 h-auto object-contain drop-shadow-2xl hover:scale-105 transition duration-300 rounded-lg"
+    />
+  </div>
+
+  {/* Bottom Quote */}
+  <div className="relative z-10">
+    <blockquote className="text-white/80 text-lg leading-relaxed font-light italic mb-4">
+      "The right opportunity doesn't always find you — we make sure it does."
+    </blockquote>
+    <p className="text-white/40 text-sm">
+      — Super Deals Staffing Platform
+    </p>
+  </div>
+
+  {/* Decorative */}
+  <div className="absolute top-0 right-0 w-80 h-80 bg-sage-600/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+  <div className="absolute bottom-0 left-0 w-60 h-60 bg-amber-500/10 rounded-full translate-y-1/2 -translate-x-1/2" />
+</div>
 
       {/* Right panel */}
       <div className="flex-1 flex items-center justify-center p-6">

@@ -52,13 +52,13 @@ export default function Sidebar({ children }) {
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
       {/* Logo */}
-      <div className={`flex items-center gap-3 px-4 py-5 border-b border-ink-100 ${collapsed ? 'justify-center' : ''}`}>
-        <div className="w-8 h-8 bg-ink-900 rounded-lg flex items-center justify-center flex-shrink-0">
-          <span className="text-white font-display font-bold text-sm">SDS</span>
+      <div className={`flex items-center gap-3 px-4 py-5 border-b border-ink-100 dark:border-slate-800 ${collapsed ? 'justify-center' : ''}`}>
+        <div className="w-11 h-11  rounded-lg flex items-center justify-center flex-shrink-0">
+          <img src="/logo.PNG" alt="Super Deals" className="h-11 w-11 object-cover" />
         </div>
         {!collapsed && (
           <div>
-            <span className="font-display font-bold text-ink-900 text-base tracking-tight">Super Deals Staffing</span>
+            <span className="font-display font-bold text-ink-900 dark:text-slate-100 text-base tracking-tight">Super Deals Staffing</span>
           </div>
         )}
       </div>
@@ -66,8 +66,8 @@ export default function Sidebar({ children }) {
       {/* User pill */}
       {!collapsed && (
         <div className="px-3 pt-4 pb-2">
-          <div className="bg-ink-50 rounded-xl p-3">
-            <p className="font-medium text-ink-900 text-sm truncate">{user?.name}</p>
+          <div className="bg-ink-50 dark:bg-slate-800/60 rounded-xl p-3">
+            <p className="font-medium text-ink-900 dark:text-slate-100 text-sm truncate">{user?.name}</p>
             <span className={`badge mt-1 ${ROLE_COLORS[user?.role]}`}>{ROLE_LABELS[user?.role]}</span>
           </div>
         </div>
@@ -92,7 +92,7 @@ export default function Sidebar({ children }) {
       </nav>
 
       {/* Bottom actions */}
-      <div className="px-3 pb-4 space-y-0.5 border-t border-ink-100 pt-3">
+      <div className="px-3 pb-4 space-y-0.5 border-t border-ink-100 dark:border-slate-800 pt-3">
         <button
           onClick={handleLogout}
           className={`sidebar-link w-full text-coral-600 hover:bg-coral-50 hover:text-coral-700 ${collapsed ? 'justify-center px-2' : ''}`}
@@ -106,10 +106,10 @@ export default function Sidebar({ children }) {
   );
 
   return (
-    <div className="flex h-screen bg-ink-50 overflow-hidden">
+    <div className="flex h-screen bg-ink-50 dark:bg-slate-950 overflow-hidden">
       {/* Desktop Sidebar */}
       <aside
-        className={`hidden lg:flex flex-col bg-white border-r border-ink-100 transition-all duration-300 relative flex-shrink-0
+        className={`hidden lg:flex flex-col bg-white dark:bg-slate-900 border-r border-ink-100 dark:border-slate-800 transition-all duration-300 relative flex-shrink-0
           ${collapsed ? 'w-16' : 'w-56'}`}
       >
         <SidebarContent />
@@ -131,7 +131,7 @@ export default function Sidebar({ children }) {
       )}
 
       {/* Mobile Sidebar */}
-      <aside className={`fixed top-0 left-0 h-full w-64 bg-white border-r border-ink-100 z-50 lg:hidden
+      <aside className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-slate-900 border-r border-ink-100 dark:border-slate-800 z-50 lg:hidden
                         transition-transform duration-300 ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <button
           onClick={() => setMobileOpen(false)}
@@ -145,7 +145,7 @@ export default function Sidebar({ children }) {
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Mobile header */}
-        <header className="lg:hidden flex items-center justify-between px-4 py-3 bg-white border-b border-ink-100 flex-shrink-0">
+        <header className="lg:hidden flex items-center justify-between px-4 py-3 bg-white dark:bg-slate-900 border-b border-ink-100 dark:border-slate-800 flex-shrink-0">
           <button onClick={() => setMobileOpen(true)} className="btn-ghost p-1.5 rounded-lg">
             <Menu size={20} />
           </button>
@@ -153,7 +153,7 @@ export default function Sidebar({ children }) {
             <div className="w-6 h-6 bg-ink-900 rounded-md flex items-center justify-center">
               <span className="text-white font-display font-bold text-xs">SDS</span>
             </div>
-            <span className="font-display font-bold text-ink-900">Super Deals Staffing</span>
+            <span className="font-display font-bold text-ink-900 dark:text-slate-100">Super Deals Staffing</span>
           </div>
           <div className="w-8" />
         </header>
