@@ -30,11 +30,11 @@ export default function AdminMatches() {
       <div className="p-6 lg:p-8 max-w-5xl mx-auto">
         <PageHeader title="All Matches" subtitle={`${data.pagination?.total || 0} total matches created`} />
 
-        <div className="flex items-center gap-1 p-1 bg-ink-100 rounded-xl w-fit mb-6">
+        <div className="flex items-center gap-1 p-1 bg-ink-100 dark:bg-slate-800 rounded-xl w-fit mb-6">
           {[{ v: '', l: 'All' }, { v: 'active', l: 'Active' }, { v: 'hired', l: 'Hired' }, { v: 'closed', l: 'Closed' }].map(({ v, l }) => (
             <button key={v} onClick={() => { setStatusFilter(v); setPage(1); }}
               className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all
-                ${statusFilter === v ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-500 hover:text-ink-700'}`}>
+                ${statusFilter === v ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-100' : 'text-slate-500 dark:text-slate-300 hover:text-slate-700 dark:hover:text-white'}`}>
               {l}
             </button>
           ))}

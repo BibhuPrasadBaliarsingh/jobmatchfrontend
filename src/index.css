@@ -153,16 +153,24 @@
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
   .logo-scroll {
-    @apply flex w-max items-center gap-6 whitespace-nowrap;
-    animation: scroll-left 24s linear infinite;
+    @apply overflow-hidden;
   }
 
-  .logo-scroll:hover {
+  .logo-scroll-track {
+    @apply flex w-max items-center gap-6 whitespace-nowrap;
+    animation: marquee-scroll 24s linear infinite;
+  }
+
+  .logo-scroll:hover .logo-scroll-track {
     animation-play-state: paused;
   }
+
+  .dark .bg-ink-50 { background-color: #0f172a !important; }
+  .dark .bg-ink-100 { background-color: #1f2937 !important; }
+  .dark .border-ink-100 { border-color: #334155 !important; }
 }
 
-@keyframes scroll-left {
+@keyframes marquee-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }

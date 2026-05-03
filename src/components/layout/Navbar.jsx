@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [logoSrc, setLogoSrc] = useState('/logo.PNG');
   const { user } = useAuth();
+
+  useEffect(() => {
+    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logo.PNG');
+    setLogoSrc(getLogo());
+
+    const handleThemeChange = (event) => {
+      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logo.PNG');
+    };
+
+    window.addEventListener('theme-change', handleThemeChange);
+    return () => window.removeEventListener('theme-change', handleThemeChange);
+  }, []);
 
   const uploadResumeLink = user?.role === 'seeker' ? '/seeker/profile' : '/register?role=seeker';
   const navItems = [
@@ -18,7 +31,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur-xl shadow-sm dark:border-slate-800 dark:bg-slate-950/85">
       <div className="page-container flex items-center justify-between gap-6 py-4 md:py-5">
         <Link to="/" className="flex items-center gap-3">
-          <img src="/logo.PNG" alt="Super Deals" className="h-11 w-11 object-cover" />
+          <img src={logoSrc} alt="Super Deals" className="h-11 w-11 object-cover" />
           <div>
             <p className="text-lg font-medium text-slate-900 dark:text-slate-100">Super Deals</p>
             {/* <p className="text-xs text-slate-500">JobMatchPro</p> */}

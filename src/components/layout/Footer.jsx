@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Facebook, Linkedin, Twitter } from 'lucide-react';
 
 export default function Footer() {
+  const [logoSrc, setLogoSrc] = useState('/logo.PNG');
+
+  useEffect(() => {
+    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logo.PNG');
+    setLogoSrc(getLogo());
+
+    const handleThemeChange = (event) => {
+      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logo.PNG');
+    };
+
+    window.addEventListener('theme-change', handleThemeChange);
+    return () => window.removeEventListener('theme-change', handleThemeChange);
+  }, []);
+
   return (
     <footer className="bg-slate-950 text-slate-100">
       <div className="page-container grid gap-8 py-14 lg:grid-cols-4">
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <img src="/logo.PNG" alt="Super Deals" className="h-10 w-10 rounded-xl object-cover bg-white" />
+            <img src={logoSrc} alt="Super Deals" className="h-10 w-10 rounded-xl object-cover " />
             <p className="text-sm uppercase tracking-[0.24em] text-slate-400">Super Deals</p>
           </div>
           <p className="max-w-sm text-sm leading-7 text-slate-300">Super Deals Staffing connects businesses with reliable talent and helps job seekers grow new careers with certainty.</p>
@@ -37,10 +52,34 @@ export default function Footer() {
 
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Follow Us</p>
-          <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-300">
-            <span className="rounded-2xl border border-slate-700 px-3 py-2 transition hover:border-white hover:text-white">LinkedIn</span>
-            <span className="rounded-2xl border border-slate-700 px-3 py-2 transition hover:border-white hover:text-white">Twitter</span>
-            <span className="rounded-2xl border border-slate-700 px-3 py-2 transition hover:border-white hover:text-white">Facebook</span>
+          <div className="mt-5 flex flex-wrap items-center gap-3 text-slate-300">
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-700 bg-slate-900 transition hover:border-white hover:text-white"
+            >
+              <Linkedin size={18} />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Twitter"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-700 bg-slate-900 transition hover:border-white hover:text-white"
+            >
+              <Twitter size={18} />
+            </a>
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-700 bg-slate-900 transition hover:border-white hover:text-white"
+            >
+              <Facebook size={18} />
+            </a>
           </div>
         </div>
       </div>

@@ -43,7 +43,7 @@ export default function RecruiterProfile() {
         <PageHeader title="Company Profile" subtitle="Keep your company information updated for better candidate matching." />
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="card p-6">
-            <h2 className="font-display font-semibold text-ink-900 mb-5 flex items-center gap-2"><Building2 size={18} /> Company Details</h2>
+            <h2 className="font-display font-semibold text-ink-900 dark:text-slate-100 mb-5 flex items-center gap-2"><Building2 size={18} /> Company Details</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <InputField label="Contact Name" value={form.name} onChange={set('name')} placeholder="Your name" className="sm:col-span-2" />
               <InputField label="Company Name" icon={Building2} value={form.companyName} onChange={set('companyName')} placeholder="Acme Corp" className="sm:col-span-2" />

@@ -81,8 +81,8 @@ export default function SeekerDashboard() {
 
             {/* Recent matches */}
             <div className="card overflow-hidden">
-              <div className="px-6 py-4 border-b border-ink-100 flex items-center justify-between">
-                <h2 className="font-display font-semibold text-ink-900">Recent Opportunities</h2>
+              <div className="px-6 py-4 border-b border-ink-100 dark:border-slate-800 flex items-center justify-between">
+                <h2 className="font-display font-semibold text-ink-900 dark:text-slate-100">Recent Opportunities</h2>
                 <Link to="/seeker/opportunities" className="text-sm text-sage-600 hover:text-sage-700 font-medium">
                   See all →
                 </Link>
@@ -98,18 +98,18 @@ export default function SeekerDashboard() {
                   }
                 />
               ) : (
-                <div className="divide-y divide-ink-50">
+                <div className="divide-y divide-ink-50 dark:divide-slate-700">
                   {data?.matches?.slice(0, 5).map((match) => (
-                    <div key={match._id} className="px-6 py-5 hover:bg-ink-50/50 transition-colors">
+                    <div key={match._id} className="px-6 py-5 hover:bg-ink-50/50 dark:hover:bg-slate-800/40 transition-colors">
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex items-start gap-4 flex-1 min-w-0">
                           <MatchScore score={match.matchScore} />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
-                              <h3 className="font-medium text-ink-900 text-sm">{match.job?.title}</h3>
+                              <h3 className="font-medium text-ink-900 dark:text-slate-100 text-sm">{match.job?.title}</h3>
                               <span className="badge badge-ink text-xs">{match.job?.jobType}</span>
                             </div>
-                            <p className="text-ink-500 text-xs mt-0.5">
+                            <p className="text-ink-500 dark:text-slate-300 text-xs mt-0.5">
                               {match.job?.companyName} · {match.job?.location}
                             </p>
                             {match.job?.requiredSkills && (
@@ -117,7 +117,7 @@ export default function SeekerDashboard() {
                                 <SkillTags skills={match.job.requiredSkills} max={4} />
                               </div>
                             )}
-                            <p className="text-ink-400 text-xs mt-2">
+                            <p className="text-ink-400 dark:text-slate-400 text-xs mt-2">
                               Sent {formatDistanceToNow(new Date(match.createdAt), { addSuffix: true })}
                             </p>
                           </div>

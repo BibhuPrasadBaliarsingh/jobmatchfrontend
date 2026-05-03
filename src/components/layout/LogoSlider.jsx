@@ -9,26 +9,38 @@ const companies = [
   { name: 'CodaEdge', logo: 'https://www.codedgeacademy.com/logoheader.png' },
 ];
 
-export default function LogoSlider() {
+export default function LogoSlider({
+  label = 'Trusted by leading teams',
+  title = 'We provide services to businesses across diverse industries',
+  description = '',
+}) {
+  const sliderItems = [...companies, ...companies];
+
   return (
     <section className="bg-white dark:bg-slate-950 py-12">
       <div className="page-container">
         <div className="mb-6 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.32em] text-primary-600">Trusted by leading teams</p>
-          <h2 className="mt-4 text-3xl font-display font-bold text-slate-900 dark:text-slate-100">We provide services to businesses across diverse industries</h2>
+          <p className="text-sm font-semibold uppercase tracking-[0.32em] text-primary-600">{label}</p>
+          <h2 className="mt-4 text-3xl font-display font-bold text-slate-900 dark:text-slate-100">{title}</h2>
+          {description ? (
+            <p className="mt-4 text-slate-600 dark:text-slate-300">{description}</p>
+          ) : null}
         </div>
 
         <div className="overflow-hidden rounded-[1.25rem] border border-slate-200 dark:border-slate-800 shadow-soft bg-slate-50 dark:bg-slate-900/40">
           <div className="logo-scroll px-6 py-5">
-            {companies.concat(companies).map((company, index) => (
-              <div key={`${company.name}-${index}`} className="flex h-20 w-40 items-center justify-center rounded-3xl bg-white dark:bg-slate-900 shadow-card transition duration-300 hover:shadow-hover">
-                <img src={company.logo} alt={company.name} className="h-12 object-contain" />
-              </div>
-            ))}
+            <div className="logo-scroll-track flex w-max items-center gap-6">
+              {sliderItems.map((company, index) => (
+                <div
+                  key={`${company.name}-${index}`}
+                  className="flex h-20 w-40 items-center justify-center rounded-3xl bg-white dark:bg-slate-900 shadow-card transition duration-300 hover:shadow-hover"
+                >
+                  <img src={company.logo} alt={company.name} className="h-12 object-contain" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-
-        
       </div>
     </section>
   );

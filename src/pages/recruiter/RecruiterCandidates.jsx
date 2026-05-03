@@ -43,11 +43,11 @@ export default function RecruiterCandidates() {
       <div className="p-6 lg:p-8 max-w-4xl mx-auto">
         <PageHeader title="Matched Candidates" subtitle={`${matches.length} candidate${matches.length !== 1 ? 's' : ''} matched by admin`} />
 
-        <div className="flex items-center gap-1 p-1 bg-ink-100 rounded-xl w-fit mb-6">
+        <div className="flex items-center gap-1 p-1 bg-ink-100 dark:bg-slate-800 rounded-xl w-fit mb-6">
           {FILTERS.map(f => (
             <button key={f} onClick={() => setFilter(f)}
               className={`px-4 py-1.5 rounded-lg text-sm font-medium capitalize transition-all
-                ${filter === f ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-500 hover:text-ink-700'}`}>
+                ${filter === f ? 'bg-white text-ink-900 shadow-sm dark:bg-slate-100 dark:text-slate-950' : 'text-ink-500 dark:text-slate-300 hover:text-ink-700 dark:hover:text-white'}`}>
               {f}
               {f !== 'all' && <span className="ml-1.5 text-xs opacity-60">({matches.filter(m => m.recruiterStatus === f).length})</span>}
             </button>
@@ -66,20 +66,20 @@ export default function RecruiterCandidates() {
                     <MatchScore score={match.matchScore} />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap mb-1">
-                        <h3 className="font-semibold text-ink-900">{match.seeker?.name}</h3>
+                        <h3 className="font-semibold text-ink-900 dark:text-slate-100">{match.seeker?.name}</h3>
                         <StatusBadge status={match.recruiterStatus} />
                         {match.status === 'hired' && <span className="badge badge-green">🎉 Hired</span>}
                       </div>
-                      <div className="flex flex-wrap gap-3 text-xs text-ink-500 mb-3">
+                      <div className="flex flex-wrap gap-3 text-xs text-ink-500 dark:text-slate-300 mb-3">
                         <span className="flex items-center gap-1"><Mail size={11} />{match.seeker?.email}</span>
                         {match.seeker?.phone && <span className="flex items-center gap-1"><Phone size={11} />{match.seeker.phone}</span>}
-                        <span className="font-medium text-ink-600">{match.seeker?.experienceYears} yrs exp</span>
+                        <span className="font-medium text-ink-600 dark:text-slate-200">{match.seeker?.experienceYears} yrs exp</span>
                       </div>
-                      <p className="text-ink-400 text-xs mb-2">
-                        For: <span className="font-medium text-ink-600">{match.job?.title}</span>
+                      <p className="text-ink-400 dark:text-slate-400 text-xs mb-2">
+                        For: <span className="font-medium text-ink-600 dark:text-slate-200">{match.job?.title}</span>
                       </p>
                       {match.seeker?.skills?.length > 0 && <SkillTags skills={match.seeker.skills} max={6} />}
-                      <p className="text-ink-400 text-xs mt-2">
+                      <p className="text-ink-400 dark:text-slate-400 text-xs mt-2">
                         Received {formatDistanceToNow(new Date(match.createdAt), { addSuffix: true })}
                         {' · '} Candidate: <StatusBadge status={match.seekerStatus} />
                       </p>

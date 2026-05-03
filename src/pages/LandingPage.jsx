@@ -3,16 +3,8 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Briefcase, CheckCircle2, Users, Sparkles } from 'lucide-react';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
+import LogoSlider from '../components/layout/LogoSlider';
 import { useAuth } from '../context/AuthContext';
-
-const clientLogos = [
-  'Mercury Logistics',
-  'BrightWave',
-  'Summit Health',
-  'CoreEdge',
-  'BluePeak',
-  'Nexa Finance',
-];
 
 const services = [
   { title: 'Temporary Staffing', description: 'Quick workforce support for urgent needs.' },
@@ -104,21 +96,11 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="page-container">
-          <div className="mx-auto mb-10 max-w-2xl text-center">
-            <p className="text-sm uppercase tracking-[0.32em] text-orange-500">Trusted by Growing Businesses</p>
-            <h2 className="mt-4 text-3xl font-display font-bold text-slate-950">Trusted by Growing Businesses</h2>
-            <p className="mt-4 text-slate-600">Our premium staffing partners rely on fast delivery, reliable talent, and real results.</p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-            {clientLogos.map((name) => (
-              <div key={name} className="flex h-24 items-center justify-center rounded-3xl border border-slate-200 bg-slate-100 text-center text-sm font-semibold uppercase tracking-[0.18em] text-slate-600 shadow-sm filter grayscale transition hover:filter-none hover:shadow-hover">
-                {name}
-              </div>
-            ))}
-          </div>
-        </section>
+        <LogoSlider
+          label="Trusted by Growing Businesses"
+          title="Trusted by Growing Businesses"
+          description="Our premium staffing partners rely on fast delivery, reliable talent, and real results."
+        />
 
         <section className="bg-slate-50 dark:bg-slate-900">
           <div className="page-container py-20">

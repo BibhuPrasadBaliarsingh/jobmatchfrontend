@@ -109,21 +109,21 @@ export default function SeekerProfile() {
         {/* Completeness bar */}
         <div className="card p-5 mb-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-medium text-ink-700 flex items-center gap-1.5">
+            <span className="text-sm font-medium text-ink-700 dark:text-slate-200 flex items-center gap-1.5">
               <Star size={14} className="text-amber-500" /> Profile completeness
             </span>
             <span className={`font-mono text-sm font-bold ${completeness === 100 ? 'text-sage-600' : 'text-amber-600'}`}>
               {completeness}%
             </span>
           </div>
-          <div className="h-2 bg-ink-100 rounded-full overflow-hidden">
+          <div className="h-2 bg-ink-100 dark:bg-slate-700 rounded-full overflow-hidden">
             <div
               className={`h-full rounded-full transition-all duration-500 ${completeness === 100 ? 'bg-sage-500' : 'bg-amber-500'}`}
               style={{ width: `${completeness}%` }}
             />
           </div>
           {completeness < 100 && (
-            <p className="text-xs text-ink-400 mt-1.5">Add {fields.filter(f => {
+            <p className="text-xs text-ink-400 dark:text-slate-400 mt-1.5">Add {fields.filter(f => {
               const v = form[f]; return !(Array.isArray(v) ? v.length > 0 : !!v || v === 0);
             }).join(', ')} to complete your profile.</p>
           )}
@@ -132,17 +132,17 @@ export default function SeekerProfile() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Resume */}
           <div className="card p-6">
-            <h2 className="font-display font-semibold text-ink-900 mb-2 flex items-center gap-2">
+            <h2 className="font-display font-semibold text-ink-900 dark:text-slate-100 mb-2 flex items-center gap-2">
               <FileText size={18} /> Resume
             </h2>
-            <p className="text-ink-500 text-xs mb-4">Upload a PDF/DOC/DOCX resume (max 5MB). It will be visible in the admin panel.</p>
+            <p className="text-ink-500 dark:text-slate-300 text-xs mb-4">Upload a PDF/DOC/DOCX resume (max 5MB). It will be visible in the admin panel.</p>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-3">
               <input
                 type="file"
                 accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 onChange={(e) => setResumeFile(e.target.files?.[0] || null)}
-                className="block w-full text-sm text-ink-600 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-medium file:bg-ink-900 file:text-white hover:file:bg-ink-800"
+                className="block w-full text-sm text-ink-600 dark:text-slate-200 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-medium file:bg-ink-900 file:text-white hover:file:bg-ink-800"
               />
               <button
                 type="button"
@@ -169,7 +169,7 @@ export default function SeekerProfile() {
                   href={user.resumeUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 text-sage-700 hover:text-sage-800 font-medium"
+                  className="inline-flex items-center gap-1 text-sage-700 dark:text-sage-300 hover:text-sage-800 dark:hover:text-sage-200 font-medium"
                 >
                   View current resume <ExternalLink size={14} />
                 </a>
@@ -179,7 +179,7 @@ export default function SeekerProfile() {
 
           {/* Basic info */}
           <div className="card p-6">
-            <h2 className="font-display font-semibold text-ink-900 mb-5 flex items-center gap-2">
+            <h2 className="font-display font-semibold text-ink-900 dark:text-slate-100 mb-5 flex items-center gap-2">
               <User size={18} /> Basic Information
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -201,7 +201,7 @@ export default function SeekerProfile() {
 
           {/* Skills */}
           <div className="card p-6">
-            <h2 className="font-display font-semibold text-ink-900 mb-5 flex items-center gap-2">
+            <h2 className="font-display font-semibold text-ink-900 dark:text-slate-100 mb-5 flex items-center gap-2">
               <Briefcase size={18} /> Skills
             </h2>
             <label className="label">Your skills</label>
@@ -210,7 +210,7 @@ export default function SeekerProfile() {
 
           {/* Experience */}
           <div className="card p-6">
-            <h2 className="font-display font-semibold text-ink-900 mb-5 flex items-center gap-2">
+            <h2 className="font-display font-semibold text-ink-900 dark:text-slate-100 mb-5 flex items-center gap-2">
               <FileText size={18} /> Experience
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -240,10 +240,10 @@ export default function SeekerProfile() {
 
           {/* Preferred roles */}
           <div className="card p-6">
-            <h2 className="font-display font-semibold text-ink-900 mb-1 flex items-center gap-2">
+            <h2 className="font-display font-semibold text-ink-900 dark:text-slate-100 mb-1 flex items-center gap-2">
               <Star size={18} /> Preferred Job Roles
             </h2>
-            <p className="text-ink-500 text-xs mb-4">Select roles you're interested in.</p>
+            <p className="text-ink-500 dark:text-slate-300 text-xs mb-4">Select roles you're interested in.</p>
             <div className="flex flex-wrap gap-2">
               {JOB_ROLES.map(role => (
                 <button
@@ -253,7 +253,7 @@ export default function SeekerProfile() {
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all
                     ${form.preferredRoles.includes(role)
                       ? 'bg-ink-900 text-white border-ink-900'
-                      : 'bg-white text-ink-600 border-ink-200 hover:border-ink-400'}`}
+                      : 'bg-white dark:bg-slate-900 text-ink-600 dark:text-slate-200 border-ink-200 dark:border-slate-700 hover:border-ink-400 dark:hover:border-slate-500'}`}
                 >
                   {role}
                 </button>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
@@ -41,6 +41,19 @@ export default function Sidebar({ children }) {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [logoSrc, setLogoSrc] = useState('/logo.PNG');
+
+  useEffect(() => {
+    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logo.PNG');
+    setLogoSrc(getLogo());
+
+    const handleThemeChange = (event) => {
+      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logo.PNG');
+    };
+
+    window.addEventListener('theme-change', handleThemeChange);
+    return () => window.removeEventListener('theme-change', handleThemeChange);
+  }, []);
 
   const navItems = NAV_ITEMS[user?.role] || [];
 
@@ -53,8 +66,8 @@ export default function Sidebar({ children }) {
     <div className="flex flex-col h-full">
       {/* Logo */}
       <div className={`flex items-center gap-3 px-4 py-5 border-b border-ink-100 dark:border-slate-800 ${collapsed ? 'justify-center' : ''}`}>
-        <div className="w-11 h-11  rounded-lg flex items-center justify-center flex-shrink-0">
-          <img src="/logo.PNG" alt="Super Deals" className="h-11 w-11 object-cover" />
+        <div className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0 ">
+          <img src={logoSrc} alt="Super Deals" className="h-11 w-11 object-cover" />
         </div>
         {!collapsed && (
           <div>

@@ -10,8 +10,8 @@ export const Spinner = ({ size = 18, className = '' }) => (
 export const PageHeader = ({ title, subtitle, action }) => (
   <div className="flex items-start justify-between mb-8">
     <div>
-      <h1 className="font-display text-2xl font-bold text-ink-900">{title}</h1>
-      {subtitle && <p className="text-ink-500 text-sm mt-1">{subtitle}</p>}
+      <h1 className="font-display text-2xl font-bold text-ink-900 dark:text-slate-100">{title}</h1>
+      {subtitle && <p className="text-ink-500 dark:text-slate-300 text-sm mt-1">{subtitle}</p>}
     </div>
     {action && <div>{action}</div>}
   </div>
@@ -31,9 +31,9 @@ export const StatCard = ({ icon: Icon, label, value, color = 'sage', trend }) =>
         <Icon size={20} />
       </div>
       <div>
-        <p className="text-ink-500 text-xs font-medium mb-0.5">{label}</p>
-        <p className="font-display text-2xl font-bold text-ink-900">{value}</p>
-        {trend && <p className="text-xs text-ink-400 mt-0.5">{trend}</p>}
+        <p className="text-ink-500 dark:text-slate-300 text-xs font-medium mb-0.5">{label}</p>
+        <p className="font-display text-2xl font-bold text-ink-900 dark:text-slate-100">{value}</p>
+        {trend && <p className="text-xs text-ink-400 dark:text-slate-400 mt-0.5">{trend}</p>}
       </div>
     </div>
   );
@@ -87,12 +87,12 @@ export const SkillTags = ({ skills = [], max = 6 }) => {
 
 // ─── Empty State ──────────────────────────────────────────────────────────────
 export const EmptyState = ({ icon: Icon, title, message, action }) => (
-  <div className="empty-state">
-    <div className="w-14 h-14 bg-ink-100 rounded-2xl flex items-center justify-center mb-4">
-      <Icon size={24} className="text-ink-400" />
+  <div className="empty-state dark:text-slate-200">
+    <div className="w-14 h-14 bg-ink-100 dark:bg-slate-700 rounded-2xl flex items-center justify-center mb-4">
+      <Icon size={24} className="text-ink-400 dark:text-slate-400" />
     </div>
-    <h3 className="font-display font-semibold text-ink-900 text-lg mb-1">{title}</h3>
-    <p className="text-ink-500 text-sm max-w-xs">{message}</p>
+    <h3 className="font-display font-semibold text-ink-900 dark:text-slate-100 text-lg mb-1">{title}</h3>
+    <p className="text-ink-500 dark:text-slate-300 text-sm max-w-xs">{message}</p>
     {action && <div className="mt-5">{action}</div>}
   </div>
 );

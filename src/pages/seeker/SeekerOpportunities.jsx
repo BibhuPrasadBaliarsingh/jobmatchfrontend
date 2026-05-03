@@ -60,13 +60,13 @@ export default function SeekerOpportunities() {
         />
 
         {/* Filter tabs */}
-        <div className="flex items-center gap-1 p-1 bg-ink-100 rounded-xl w-fit mb-6">
+        <div className="flex items-center gap-1 p-1 bg-ink-100 dark:bg-slate-800 rounded-xl w-fit mb-6">
           {FILTERS.map(f => (
             <button
               key={f}
               onClick={() => setFilter(f)}
               className={`px-4 py-1.5 rounded-lg text-sm font-medium capitalize transition-all
-                ${filter === f ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-500 hover:text-ink-700'}`}
+                ${filter === f ? 'bg-white text-ink-900 shadow-sm dark:bg-slate-100 dark:text-slate-950' : 'text-ink-500 dark:text-slate-300 hover:text-ink-700 dark:hover:text-white'}`}
             >
               {f}
               {f !== 'all' && (
@@ -95,15 +95,15 @@ export default function SeekerOpportunities() {
                   <div className="flex items-start gap-4">
                     <MatchScore score={match.matchScore} />
                     <div>
-                      <h3 className="font-display font-semibold text-ink-900 text-base">{match.job?.title}</h3>
-                      <p className="text-ink-500 text-sm">{match.job?.companyName}</p>
+                      <h3 className="font-display font-semibold text-ink-900 dark:text-slate-100 text-base">{match.job?.title}</h3>
+                      <p className="text-ink-500 dark:text-slate-300 text-sm">{match.job?.companyName}</p>
                     </div>
                   </div>
                   <StatusBadge status={match.seekerStatus} />
                 </div>
 
                 {/* Meta */}
-                <div className="flex flex-wrap items-center gap-3 text-xs text-ink-500 mb-4">
+                <div className="flex flex-wrap items-center gap-3 text-xs text-ink-500 dark:text-slate-300 mb-4">
                   <span className="flex items-center gap-1">
                     <MapPin size={12} /> {match.job?.location}
                   </span>
@@ -115,7 +115,7 @@ export default function SeekerOpportunities() {
                       {match.job.jobType}
                     </span>
                   )}
-                  <span className="text-ink-400">
+                  <span className="text-ink-400 dark:text-slate-400">
                     {match.job?.experienceRequired}+ yrs exp required
                   </span>
                 </div>
@@ -123,7 +123,7 @@ export default function SeekerOpportunities() {
                 {/* Matched skills */}
                 {match.matchedSkills?.length > 0 && (
                   <div className="mb-4">
-                    <p className="text-xs text-ink-500 font-medium mb-1.5 flex items-center gap-1">
+                    <p className="text-xs text-ink-500 dark:text-slate-300 font-medium mb-1.5 flex items-center gap-1">
                       <Filter size={11} /> Matched skills
                     </p>
                     <SkillTags skills={match.matchedSkills} max={8} />
@@ -133,14 +133,14 @@ export default function SeekerOpportunities() {
                 {/* Required skills */}
                 {match.job?.requiredSkills?.length > 0 && (
                   <div className="mb-4">
-                    <p className="text-xs text-ink-500 font-medium mb-1.5">All required skills</p>
+                    <p className="text-xs text-ink-500 dark:text-slate-300 font-medium mb-1.5">All required skills</p>
                     <SkillTags skills={match.job.requiredSkills} max={6} />
                   </div>
                 )}
 
                 {/* Recruiter status */}
-                <div className="flex items-center justify-between pt-4 border-t border-ink-100">
-                  <div className="flex items-center gap-2 text-xs text-ink-500">
+                <div className="flex items-center justify-between pt-4 border-t border-ink-100 dark:border-slate-800">
+                  <div className="flex items-center gap-2 text-xs text-ink-500 dark:text-slate-300">
                     <span>Recruiter status:</span>
                     <StatusBadge status={match.recruiterStatus} />
                   </div>

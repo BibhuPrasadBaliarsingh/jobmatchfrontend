@@ -64,14 +64,14 @@ export default function RecruiterDashboard() {
             </div>
 
             {/* Tabs */}
-            <div className="flex items-center gap-1 p-1 bg-ink-100 rounded-xl w-fit mb-6">
+            <div className="flex items-center gap-1 p-1 bg-ink-100 dark:bg-slate-800 rounded-xl w-fit mb-6">
               {[{ id: 'candidates', label: 'Candidates', count: data?.matches?.length },
                 { id: 'jobs', label: 'My Jobs', count: data?.jobs?.length }].map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center gap-1.5
-                    ${activeTab === tab.id ? 'bg-white text-ink-900 shadow-sm' : 'text-ink-500 hover:text-ink-700'}`}
+                    ${activeTab === tab.id ? 'bg-white text-ink-900 shadow-sm dark:bg-slate-100 dark:text-slate-950' : 'text-ink-500 dark:text-slate-300 hover:text-ink-700 dark:hover:text-white'}`}
                 >
                   {tab.label}
                   <span className="text-xs opacity-60">({tab.count || 0})</span>
@@ -96,12 +96,12 @@ export default function RecruiterDashboard() {
                           <MatchScore score={match.matchScore} />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
-                              <h3 className="font-semibold text-ink-900">{match.seeker?.name}</h3>
+                              <h3 className="font-semibold text-ink-900 dark:text-slate-100">{match.seeker?.name}</h3>
                               <StatusBadge status={match.recruiterStatus} />
                             </div>
-                            <p className="text-ink-500 text-sm">{match.seeker?.email}</p>
-                            <p className="text-ink-400 text-xs mt-0.5">
-                              For: <span className="font-medium text-ink-600">{match.job?.title}</span>
+                            <p className="text-ink-500 dark:text-slate-300 text-sm">{match.seeker?.email}</p>
+                            <p className="text-ink-400 dark:text-slate-400 text-xs mt-0.5">
+                              For: <span className="font-medium text-ink-600 dark:text-slate-200">{match.job?.title}</span>
                               {' · '}{match.seeker?.experienceYears} yrs exp
                             </p>
 
@@ -111,14 +111,14 @@ export default function RecruiterDashboard() {
                               </div>
                             )}
 
-                            <p className="text-ink-400 text-xs mt-2">
+                            <p className="text-ink-400 dark:text-slate-400 text-xs mt-2">
                               Received {formatDistanceToNow(new Date(match.createdAt), { addSuffix: true })}
                             </p>
                           </div>
                         </div>
 
                         <div className="flex flex-col items-end gap-2 flex-shrink-0">
-                          <div className="text-xs text-ink-400">
+                          <div className="text-xs text-ink-400 dark:text-slate-400">
                             Candidate: <StatusBadge status={match.seekerStatus} />
                           </div>
                           {match.recruiterStatus === 'pending' ? (
@@ -162,21 +162,21 @@ export default function RecruiterDashboard() {
                 <div className="card overflow-hidden">
                   <div className="divide-y divide-ink-50">
                     {data.jobs.map(job => (
-                      <div key={job._id} className="px-6 py-4 flex items-start justify-between gap-4 hover:bg-ink-50/40 transition-colors">
+                      <div key={job._id} className="px-6 py-4 flex items-start justify-between gap-4 hover:bg-ink-50/40 dark:hover:bg-slate-800/40 transition-colors">
                         <div>
                           <div className="flex items-center gap-2 flex-wrap">
-                            <h3 className="font-medium text-ink-900 text-sm">{job.title}</h3>
+                            <h3 className="font-medium text-ink-900 dark:text-slate-100 text-sm">{job.title}</h3>
                             <span className={`badge ${JOB_STATUS_COLORS[job.status] || 'badge-ink'}`}>{job.status}</span>
                             <span className="badge badge-ink">{job.jobType}</span>
                           </div>
-                          <p className="text-ink-500 text-xs mt-0.5 flex items-center gap-1">
+                          <p className="text-ink-500 dark:text-slate-300 text-xs mt-0.5 flex items-center gap-1">
                             <MapPin size={11} />{job.location} · {job.experienceRequired}+ yrs
                           </p>
                           <div className="mt-1.5">
                             <SkillTags skills={job.requiredSkills} max={4} />
                           </div>
                         </div>
-                        <p className="text-xs text-ink-400 flex-shrink-0">
+                        <p className="text-xs text-ink-400 dark:text-slate-400 flex-shrink-0">
                           {formatDistanceToNow(new Date(job.createdAt), { addSuffix: true })}
                         </p>
                       </div>

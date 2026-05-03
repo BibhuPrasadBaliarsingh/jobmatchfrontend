@@ -37,15 +37,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-ink-50 flex">
+    <div className="min-h-screen bg-ink-50 dark:bg-slate-950 flex">
       {/* Left panel */}
-      <div className="hidden lg:flex flex-col justify-between w-2/5 bg-ink-900 p-12 relative overflow-hidden">
+      <div className="hidden lg:flex flex-col justify-between w-2/5 bg-ink-900 dark:bg-slate-950 p-12 relative overflow-hidden">
 
   {/* Top Logo */}
   <div className="relative z-10">
     <Link to="/" className="flex items-center gap-2.5">
-      <div className="w-15 h-15 bg-white rounded-xl flex items-center justify-center">
-        <img src="/logo.PNG" alt="Super Deals" className="h-11 w-11 object-cover" />
+      <div className="w-15 h-15  rounded-xl flex items-center justify-center">
+        <img src="/logodrak.PNG" alt="Super Deals" className="h-11 w-11 object-cover" />
       </div>
       <span className="text-white font-display font-bold text-xl">
         Super Deals Staffing
@@ -78,8 +78,8 @@ export default function LoginPage() {
 </div>
 
       {/* Right panel */}
-      <div className="flex-1 flex items-center justify-center p-6">
-        <div className="w-full max-w-sm animate-slide-up">
+      <div className="flex-1 flex items-center justify-center p-6 bg-white dark:bg-slate-900">
+        <div className="w-full max-w-sm animate-slide-up rounded-[2rem] bg-white dark:bg-slate-950 p-8 shadow-soft">
           {/* Mobile logo */}
           <div className="lg:hidden flex justify-center mb-8">
             <Link to="/" className="flex items-center gap-2">
@@ -90,8 +90,8 @@ export default function LoginPage() {
             </Link>
           </div>
 
-          <h2 className="font-display text-3xl font-bold text-ink-900 mb-1">Sign in</h2>
-          <p className="text-ink-500 text-sm mb-8">Welcome back — let's pick up where you left off.</p>
+          <h2 className="font-display text-3xl font-bold text-ink-900 dark:text-slate-100 mb-1">Sign in</h2>
+          <p className="text-ink-500 dark:text-slate-400 text-sm mb-8">Welcome back — let's pick up where you left off.</p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <InputField

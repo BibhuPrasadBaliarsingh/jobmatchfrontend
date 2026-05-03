@@ -54,7 +54,7 @@ export default function PostJob() {
 
           {/* Basic info */}
           <div className="card p-6">
-            <h2 className="font-display font-semibold text-ink-900 mb-5 flex items-center gap-2"><Briefcase size={18} /> Job Details</h2>
+            <h2 className="font-display font-semibold text-ink-900 dark:text-slate-100 mb-5 flex items-center gap-2"><Briefcase size={18} /> Job Details</h2>
             <div className="space-y-4">
               <InputField label="Job Title" value={form.title} onChange={set('title')} placeholder="e.g. Senior React Developer" error={errors.title} />
               <InputField label="Company Name (optional)" value={form.companyName} onChange={set('companyName')} placeholder="Leave blank to use your profile name" />
@@ -74,7 +74,7 @@ export default function PostJob() {
 
           {/* Skills & Requirements */}
           <div className="card p-6">
-            <h2 className="font-display font-semibold text-ink-900 mb-5 flex items-center gap-2"><Clock size={18} /> Requirements</h2>
+            <h2 className="font-display font-semibold text-ink-900 dark:text-slate-100 mb-5 flex items-center gap-2"><Clock size={18} /> Requirements</h2>
             <div className="space-y-4">
               <div>
                 <label className="label">Required Skills *</label>
@@ -103,7 +103,7 @@ export default function PostJob() {
 
           {/* Salary */}
           <div className="card p-6">
-            <h2 className="font-display font-semibold text-ink-900 mb-5 flex items-center gap-2"><DollarSign size={18} /> Salary Range (optional)</h2>
+            <h2 className="font-display font-semibold text-ink-900 dark:text-slate-100 mb-5 flex items-center gap-2"><DollarSign size={18} /> Salary Range (optional)</h2>
             <div className="grid grid-cols-3 gap-4">
               <div>
                 <label className="label">Currency</label>

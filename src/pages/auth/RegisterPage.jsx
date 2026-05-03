@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Mail, Lock, User, Phone, MapPin, Briefcase, Building2 } from 'lucide-react';
@@ -17,6 +17,19 @@ export default function RegisterPage() {
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [logoSrc, setLogoSrc] = useState('/logo.PNG');
+
+  useEffect(() => {
+    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logo.PNG');
+    setLogoSrc(getLogo());
+
+    const handleThemeChange = (event) => {
+      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logo.PNG');
+    };
+
+    window.addEventListener('theme-change', handleThemeChange);
+    return () => window.removeEventListener('theme-change', handleThemeChange);
+  }, []);
 
   const set = (key) => (e) => setForm(p => ({ ...p, [key]: e.target.value }));
 
@@ -47,18 +60,18 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-ink-50 flex items-center justify-center p-6">
-      <div className="w-full max-w-lg animate-slide-up">
+    <div className="min-h-screen bg-ink-50 dark:bg-slate-950 flex items-center justify-center p-6">
+      <div className="w-full max-w-lg animate-slide-up bg-white dark:bg-slate-900 rounded-[2rem] p-8 shadow-soft">
         {/* Header */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-15 h-15 bg-white rounded-lg flex items-center justify-center">
-              <img src="/logo.PNG" alt="Super Deals" className="h-11 w-11 object-cover" />
+            <div className="w-15 h-15 rounded-lg flex items-center justify-center ">
+              <img src={logoSrc} alt="Super Deals" className="h-11 w-11 object-cover" />
             </div>
-            <span className="font-display font-bold text-ink-900 text-lg">Super Deals Staffing</span>
+            <span className="font-display font-bold text-slate-950 dark:text-slate-100 text-lg">Super Deals Staffing</span>
           </Link>
-          <h2 className="font-display text-3xl font-bold text-ink-900">Create an account</h2>
-          <p className="text-ink-500 text-sm mt-1">Join the platform that matches talent with opportunity.</p>
+          <h2 className="font-display text-3xl font-bold text-slate-950 dark:text-slate-100">Create an account</h2>
+          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Join the platform that matches talent with opportunity.</p>
         </div>
 
         {/* Role toggle */}
