@@ -6,7 +6,7 @@ export default function Footer() {
   const [logoSrc, setLogoSrc] = useState('/logo.PNG');
 
   useEffect(() => {
-    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logo.PNG');
+    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logodark.PNG');
     setLogoSrc(getLogo());
 
     const handleThemeChange = (event) => {
