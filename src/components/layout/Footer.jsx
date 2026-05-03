@@ -10,7 +10,7 @@ export default function Footer() {
     setLogoSrc(getLogo());
 
     const handleThemeChange = (event) => {
-      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logo.PNG');
+      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logodark.PNG');
     };
 
     window.addEventListener('theme-change', handleThemeChange);
