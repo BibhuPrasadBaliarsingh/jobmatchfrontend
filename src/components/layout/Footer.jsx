@@ -6,11 +6,11 @@ export default function Footer() {
   const [logoSrc, setLogoSrc] = useState('/logo.PNG');
 
   useEffect(() => {
-    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logodark.PNG');
+    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logodrak.PNG');
     setLogoSrc(getLogo());
 
     const handleThemeChange = (event) => {
-      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logodark.PNG');
+      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logodrak.PNG');
     };
 
     window.addEventListener('theme-change', handleThemeChange);
