@@ -72,7 +72,7 @@ export default function Footer() {
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Follow Us</p>
           <div className="mt-5 flex flex-wrap items-center gap-3 text-slate-300">
             <a
-              href="https://www.linkedin.com"
+              href="https://www.linkedin.com/in/samir-das-0135b6171/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
