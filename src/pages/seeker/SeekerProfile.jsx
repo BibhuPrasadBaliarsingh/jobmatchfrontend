@@ -6,7 +6,30 @@ import { useAuth } from '../../context/AuthContext';
 import { User, MapPin, Phone, Briefcase, FileText, Star, Upload, ExternalLink, Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
-const JOB_ROLES = ['Frontend Developer', 'Backend Developer', 'Full Stack Developer', 'Data Scientist', 'DevOps Engineer', 'Product Manager', 'UI/UX Designer', 'Mobile Developer', 'Data Analyst', 'QA Engineer', 'Security Engineer', 'ML Engineer', 'Watchman', 'Driver', 'Accountant', 'HR Manager', 'Sales Executive'];
+const JOB_ROLES = [
+  'Branding & Promotions',
+  'Event Management',
+  'IT & Software',
+  'BPO',
+  'Banking',
+  'Insurance',
+  'Finance',
+  'NGO',
+  'Sales',
+  'Marketing',
+  'Logistics',
+  'Steel Plant Maintenance & Operations',
+  'Hospital Industry',
+  'Hospitality Industry',
+  'Hotel Industry',
+  'Security',
+  'Labour',
+  'Watchman',
+  'Driver',
+  'Accountant',
+  'HR Manager',
+  'Sales Executive',
+];
 
 export default function SeekerProfile() {
   const { user, updateUser } = useAuth();
@@ -252,8 +275,8 @@ export default function SeekerProfile() {
                   onClick={() => toggleRole(role)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all
                     ${form.preferredRoles.includes(role)
-                      ? 'bg-ink-900 text-white border-ink-900'
-                      : 'bg-white dark:bg-slate-900 text-ink-600 dark:text-slate-200 border-ink-200 dark:border-slate-700 hover:border-ink-400 dark:hover:border-slate-500'}`}
+                      ? 'bg-orange-500 text-white border-orange-500 shadow-sm shadow-orange-500/20'
+                      : 'bg-white dark:bg-slate-900 text-ink-600 dark:text-slate-200 border-ink-200 dark:border-slate-700 hover:border-orange-400 dark:hover:border-orange-400'}`}
                 >
                   {role}
                 </button>

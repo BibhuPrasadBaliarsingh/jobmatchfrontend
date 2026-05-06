@@ -28,7 +28,10 @@ export default function LoginPage() {
     try {
       const user = await login(form.email, form.password);
       toast.success(`Welcome back, ${user.name}!`);
-      navigate(`/${user.role}/dashboard`);
+      const destination = user.role === 'seeker' && user.phone && user.location
+        ? '/seeker/profile'
+        : `/${user.role}/dashboard`;
+      navigate(destination);
     } catch (err) {
       toast.error(err.response?.data?.message || 'Login failed');
     } finally {

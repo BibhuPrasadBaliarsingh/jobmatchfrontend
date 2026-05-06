@@ -57,6 +57,7 @@ export const AuthProvider = ({ children }) => {
     const { token, user } = res.data.data;
     localStorage.setItem('jm_token', token);
     dispatch({ type: 'LOGIN_SUCCESS', payload: { user, token } });
+    await loadUser();
     return user;
   };
 
@@ -65,6 +66,7 @@ export const AuthProvider = ({ children }) => {
     const { token, user } = res.data.data;
     localStorage.setItem('jm_token', token);
     dispatch({ type: 'LOGIN_SUCCESS', payload: { user, token } });
+    await loadUser();
     return user;
   };
 

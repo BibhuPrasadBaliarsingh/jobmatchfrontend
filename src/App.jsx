@@ -29,6 +29,9 @@ import AdminMatchEngine from './pages/admin/AdminMatchEngine';
 // Common
 import NotFound from './pages/NotFound';
 import LandingPage from './pages/LandingPage';
+import AboutPage from './pages/AboutPage';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import Terms from './pages/Terms';
 import LoadingScreen from './components/common/LoadingScreen';
 import ThemeToggle from './components/common/ThemeToggle';
 
@@ -41,10 +44,16 @@ const PrivateRoute = ({ children, role }) => {
   return children;
 };
 
+const getUserLanding = (user) => {
+  if (!user) return '/login';
+  if (user.role === 'seeker' && user.phone && user.location) return '/seeker/profile';
+  return `/${user.role}/dashboard`;
+};
+
 const PublicOnlyRoute = ({ children }) => {
   const { user, loading } = useAuth();
   if (loading) return <LoadingScreen />;
-  if (user) return <Navigate to={`/${user.role}/dashboard`} replace />;
+  if (user) return <Navigate to={getUserLanding(user)} replace />;
   return children;
 };
 
@@ -60,6 +69,9 @@ const AppRoutes = () => (
     <Route path="/seeker/dashboard" element={<PrivateRoute role="seeker"><SeekerDashboard /></PrivateRoute>} />
     <Route path="/seeker/profile" element={<PrivateRoute role="seeker"><SeekerProfile /></PrivateRoute>} />
     <Route path="/seeker/opportunities" element={<PrivateRoute role="seeker"><SeekerOpportunities /></PrivateRoute>} />
+    <Route path="/about" element={<AboutPage />} />
+    <Route path="/privacy" element={<PrivacyPolicy />} />
+    <Route path="/terms" element={<Terms />} />
 
     {/* Recruiter */}
     <Route path="/recruiter/dashboard" element={<PrivateRoute role="recruiter"><RecruiterDashboard /></PrivateRoute>} />

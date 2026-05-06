@@ -68,7 +68,12 @@ export default function LandingPage() {
                   Right Talent. Right Time. Right Results.
                 </h1>
                 <p className="max-w-2xl text-lg leading-9 text-slate-300">
-                  We connect top talent with leading companies through temporary staffing, permanent hiring, contract recruitment, and workforce solutions.
+                  Looking for a Manpower Staffing Service provider across all over ODISHA ❓
+
+We are providing all types of manpower Services across All over ODISHA
+
+Join us, to solve your Problems within 24 working hours 👍 
+
                 </p>
               </div>
 
@@ -77,7 +82,7 @@ export default function LandingPage() {
                   Hire Talent
                   <ArrowRight size={18} />
                 </Link>
-                <Link to="/seeker/opportunities" className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white/95 px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100">
+                <Link to={seekerLink} className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white/95 px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100">
                   Find Jobs
                 </Link>
               </div>

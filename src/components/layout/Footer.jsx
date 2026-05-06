@@ -19,7 +19,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-slate-950 text-slate-100">
-      <div className="page-container grid gap-8 py-14 lg:grid-cols-4">
+      <div className="page-container grid gap-8 py-14 lg:grid-cols-5">
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <img src={logoSrc} alt="Super Deals" className="h-10 w-10 rounded-xl object-cover " />
@@ -42,11 +42,29 @@ export default function Footer() {
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Company</p>
           <ul className="mt-5 space-y-3 text-sm text-slate-300">
-            <li><Link to="/" className="transition hover:text-white">About Us</Link></li>
+            <li><Link to="/about" className="transition hover:text-white">About Us</Link></li>
             <li><Link to="/seeker/opportunities" className="transition hover:text-white">Jobs</Link></li>
             <li><Link to="/register" className="transition hover:text-white">Contact</Link></li>
-            <li><Link to="/" className="transition hover:text-white">Privacy Policy</Link></li>
-            <li><Link to="/" className="transition hover:text-white">Terms</Link></li>
+            <li><Link to="/privacy" className="transition hover:text-white">Privacy Policy</Link></li>
+            <li><Link to="/terms" className="transition hover:text-white">Terms</Link></li>
+          </ul>
+        </div>
+
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">Contact</p>
+          <ul className="mt-5 space-y-3 text-sm text-slate-300">
+            <li>
+              <a href="https://wa.me/919937805982" target="_blank" rel="noreferrer" className="transition hover:text-white">
+                WhatsApp: +91 99378 05982
+              </a>
+            </li>
+            <li>Mobile: +91 99378 05982</li>
+            <li>
+              <a href="mailto:hrsuperdealsbbsr@gmail.com" className="transition hover:text-white">
+                hrsuperdealsbbsr@gmail.com
+              </a>
+            </li>
+            <li>Bhubaneswar, Odisha, India</li>
           </ul>
         </div>
 
