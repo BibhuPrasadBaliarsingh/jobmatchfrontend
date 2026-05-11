@@ -3,7 +3,7 @@ import Sidebar from '../../components/layout/Sidebar';
 import { PageHeader, InputField, Spinner } from '../../components/common/UI';
 import { recruiterApi } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
-import { Building2, MapPin, Phone, FileText } from 'lucide-react';
+import { Building2, MapPin, Phone, FileText, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function RecruiterProfile() {
@@ -37,6 +37,20 @@ export default function RecruiterProfile() {
     }
   };
 
+  const handleSendWhatsApp = () => {
+    const message = [
+      'Hi, here is our full JobMatch company profile data:',
+      `Contact Name: ${form.name || user?.name || 'N/A'}`,
+      `Company Name: ${form.companyName || 'N/A'}`,
+      `Phone: ${form.phone || 'N/A'}`,
+      `Location: ${form.location || 'N/A'}`,
+      `Company Description: ${form.companyDescription || 'N/A'}`,
+    ].filter(Boolean).join('\n');
+
+    const url = `https://wa.me/7655047671?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
   return (
     <Sidebar>
       <div className="p-6 lg:p-8 max-w-2xl mx-auto">
@@ -55,9 +69,18 @@ export default function RecruiterProfile() {
               </div>
             </div>
           </div>
-          <button type="submit" disabled={loading} className="btn-primary btn-lg w-full">
-            {loading ? <Spinner /> : 'Save Profile'}
-          </button>
+          <div className="flex flex-col sm:flex-row items-center gap-3">
+            <button type="submit" disabled={loading} className="btn-primary btn-lg flex-1 w-full sm:w-auto">
+              {loading ? <Spinner /> : 'Save Profile'}
+            </button>
+            <button
+              type="button"
+              onClick={handleSendWhatsApp}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-7 py-3.5 text-base font-medium text-white transition-all duration-150 hover:bg-emerald-700 active:scale-95 w-full sm:w-auto"
+            >
+              <Send size={16} /> Send to WhatsApp
+            </button>
+          </div>
         </form>
       </div>
     </Sidebar>

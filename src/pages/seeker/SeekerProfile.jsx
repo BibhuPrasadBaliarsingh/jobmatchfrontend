@@ -3,7 +3,7 @@ import Sidebar from '../../components/layout/Sidebar';
 import { PageHeader, InputField, SkillInput, Spinner } from '../../components/common/UI';
 import { seekerApi } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
-import { User, MapPin, Phone, Briefcase, FileText, Star, Upload, ExternalLink, Trash2 } from 'lucide-react';
+import { User, MapPin, Phone, Briefcase, FileText, Star, Upload, ExternalLink, Trash2, Send } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const JOB_ROLES = [
@@ -122,6 +122,24 @@ export default function SeekerProfile() {
     } finally {
       setUploadingResume(false);
     }
+  };
+
+  const handleSendWhatsApp = () => {
+    const message = [
+      'Hi, here is my full JobMatch profile data:',
+      `Name: ${form.name || user?.name || 'N/A'}`,
+      `Phone: ${form.phone || 'N/A'}`,
+      `Location: ${form.location || 'N/A'}`,
+      `Bio: ${form.bio || 'N/A'}`,
+      `Skills: ${form.skills?.length ? form.skills.join(', ') : 'N/A'}`,
+      `Experience Years: ${form.experienceYears ?? 'N/A'}`,
+      `Experience Description: ${form.experienceDescription || 'N/A'}`,
+      `Preferred Roles: ${form.preferredRoles?.length ? form.preferredRoles.join(', ') : 'N/A'}`,
+      `Resume: ${user?.resumeUrl ? user.resumeUrl : 'Not uploaded'}`,
+    ].filter(Boolean).join('\n');
+
+    const url = `https://wa.me/7655047671?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
   };
 
   return (
@@ -284,9 +302,18 @@ export default function SeekerProfile() {
             </div>
           </div>
 
-          <button type="submit" disabled={loading} className="btn-primary btn-lg w-full">
-            {loading ? <Spinner /> : 'Save Profile'}
-          </button>
+          <div className="flex flex-col sm:flex-row items-center gap-3">
+            <button type="submit" disabled={loading} className="btn-primary btn-lg flex-1 w-full sm:w-auto">
+              {loading ? <Spinner /> : 'Save Profile'}
+            </button>
+            <button
+              type="button"
+              onClick={handleSendWhatsApp}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-7 py-3.5 text-base font-medium text-white transition-all duration-150 hover:bg-emerald-700 active:scale-95"
+            >
+              <Send size={16} /> Send to WhatsApp
+            </button>
+          </div>
         </form>
       </div>
     </Sidebar>
