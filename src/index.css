@@ -8,10 +8,15 @@
   html { scroll-behavior: smooth; }
 
   body {
-    @apply bg-white text-slate-900 font-sans antialiased dark:bg-slate-950 dark:text-slate-100;
+    @apply bg-white text-slate-950 font-sans antialiased;
     font-size: 15px;
     line-height: 1.6;
     min-height: 100vh;
+  }
+
+  .dark body {
+    background-color: #000000;
+    color: #ffffff;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -50,7 +55,17 @@
   }
 
   .btn-primary {
-    @apply btn bg-primary-600 text-white hover:bg-primary-700 px-5 py-2.5 text-sm;
+    @apply btn text-slate-950 px-5 py-2.5 text-sm;
+    background-image: linear-gradient(90deg, #f5c21f 0%, #f8d155 60%, #f4b400 100%);
+    box-shadow: 0 10px 25px rgba(245, 194, 31, 0.22);
+  }
+
+  .btn-primary:hover {
+    background-image: linear-gradient(90deg, #f9d14a 0%, #fcd965 50%, #f5ba06 100%);
+  }
+
+  .dark .btn-primary {
+    color: #0f172a;
   }
 
   .btn-secondary {
@@ -168,6 +183,10 @@
   .dark .bg-ink-50 { background-color: #0f172a !important; }
   .dark .bg-ink-100 { background-color: #1f2937 !important; }
   .dark .border-ink-100 { border-color: #334155 !important; }
+  .dark .card .text-ink-900 { color: #f8fafc !important; }
+  .dark .card .text-ink-600 { color: #cbd5e1 !important; }
+  .dark .card .text-ink-500 { color: #94a3b8 !important; }
+  .dark .card .text-ink-400 { color: #718096 !important; }
 }
 
 @keyframes marquee-scroll {

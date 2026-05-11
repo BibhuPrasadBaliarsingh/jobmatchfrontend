@@ -44,11 +44,11 @@ export default function Sidebar({ children }) {
   const [logoSrc, setLogoSrc] = useState('/logo.PNG');
 
   useEffect(() => {
-    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logo.PNG');
+    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logo.png');
     setLogoSrc(getLogo());
 
     const handleThemeChange = (event) => {
-      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logo.PNG');
+      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logo.png');
     };
 
     window.addEventListener('theme-change', handleThemeChange);

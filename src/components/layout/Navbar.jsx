@@ -9,11 +9,11 @@ export default function Navbar() {
   const { user } = useAuth();
 
   useEffect(() => {
-    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logo.PNG');
+    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logo.png');
     setLogoSrc(getLogo());
 
     const handleThemeChange = (event) => {
-      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logo.PNG');
+      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logo.png');
     };
 
     window.addEventListener('theme-change', handleThemeChange);
@@ -28,19 +28,23 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur-xl shadow-sm dark:border-slate-800 dark:bg-slate-950/85">
-      <div className="page-container flex items-center justify-between gap-6 py-4 md:py-5">
+    <header className="sticky top-0 z-40 border-b border-slate-800/50 bg-[#00253D]/95 text-white shadow-sm backdrop-blur-xl dark:border-slate-800 dark:bg-black/95 dark:text-white">
+      <div className="page-container flex flex-wrap items-center justify-between gap-4 py-4 md:py-5">
         <Link to="/" className="flex items-center gap-3">
           <img src={logoSrc} alt="Super Deals" className="h-11 w-11 object-cover" />
           <div>
-            <p className="text-lg font-medium text-slate-900 dark:text-slate-100">Super Deals</p>
-            {/* <p className="text-xs text-slate-500">JobMatchPro</p> */}
+            <p className="text-lg font-medium text-white">Super Deals</p>
+            <p className="text-xs text-slate-200/80">I’m always with you</p>
           </div>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-700 dark:text-slate-200">
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-100">
           {navItems.map((item) => (
-            <Link key={item.label} to={item.to} className="transition-colors duration-150 hover:text-primary-700">
+            <Link
+              key={item.label}
+              to={item.to}
+              className="transition-colors duration-150 hover:text-amber-300"
+            >
               {item.label}
             </Link>
           ))}
@@ -49,7 +53,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             to="/login"
-            className="btn btn-sm hidden md:inline-flex text-sm bg-red-500 text-white hover:bg-red-600 border-none"
+            className="btn btn-primary btn-sm hidden md:inline-flex text-sm"
           >
             Login
           </Link>
@@ -66,14 +70,14 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-slate-200 bg-white/95 px-4 pb-5 shadow-sm dark:border-slate-800 dark:bg-slate-950/90">
+        <div className="md:hidden border-t border-slate-700 bg-[#00253D]/95 px-4 pb-5 shadow-sm dark:border-slate-800 dark:bg-black/95">
           <div className="flex flex-col gap-3 py-4">
             {navItems.map((item) => (
               <Link
                 key={item.label}
                 to={item.to}
                 onClick={() => setOpen(false)}
-                className="rounded-2xl px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50 hover:text-primary-700 dark:text-slate-200 dark:hover:bg-slate-900/60"
+                className="rounded-2xl px-4 py-3 text-sm font-medium text-slate-100 transition hover:bg-slate-800 hover:text-amber-300"
               >
                 {item.label}
               </Link>
@@ -83,7 +87,7 @@ export default function Navbar() {
             <Link
               to="/login"
               onClick={() => setOpen(false)}
-              className="mt-2 text-center bg-red-500 text-white py-3 rounded-2xl text-sm font-medium hover:bg-red-600 transition"
+              className="mt-2 text-center btn btn-primary rounded-2xl text-sm font-medium"
             >
               Login
             </Link>

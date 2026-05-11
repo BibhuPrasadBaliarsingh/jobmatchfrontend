@@ -53,49 +53,46 @@ export default function LandingPage() {
   const recruiterLink = user?.role === 'recruiter' ? '/recruiter/dashboard' : '/register?role=recruiter';
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+    <div className="min-h-screen bg-white text-slate-900 dark:bg-black dark:text-white">
       <Navbar />
 
       <main className="space-y-24">
-        <section className="bg-slate-950 text-white">
+        <section className="bg-[#00253D] text-white dark:bg-black dark:text-white">
           <div className="page-container grid gap-12 items-center py-24 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="space-y-8">
               
 
               <div className="space-y-6 max-w-3xl">
-                <p className="text-sm uppercase tracking-[0.32em] text-orange-300">Staffing & workforce solutions</p>
+                <p className="text-sm uppercase tracking-[0.32em] text-amber-300">Staffing & workforce solutions</p>
                 <h1 className="text-5xl font-display font-bold tracking-tight text-white sm:text-6xl">
                   Right Talent. Right Time. Right Results.
                 </h1>
-                <p className="max-w-2xl text-lg leading-9 text-slate-300">
-                  Looking for a Manpower Staffing Service provider across all over ODISHA ❓
-
-We are providing all types of manpower Services across All over ODISHA
-
-Join us, to solve your Problems within 24 working hours 👍 
-
+                <p className="text-xl font-medium text-amber-100/90">I’m always with you</p>
+                <p className="max-w-2xl text-lg leading-9 text-amber-100/80">
+                  Looking for a manpower staffing service provider across Odisha?
+                  We provide all types of manpower services across the state, helping you solve hiring challenges within 24 working hours.
                 </p>
               </div>
 
               <div className="flex flex-col gap-4 sm:flex-row">
-                <Link to={recruiterLink} className="inline-flex items-center justify-center rounded-2xl bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 transition hover:bg-orange-600">
+                <Link to={recruiterLink} className="btn btn-primary btn-lg inline-flex items-center justify-center gap-2">
                   Hire Talent
                   <ArrowRight size={18} />
                 </Link>
-                <Link to={seekerLink} className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white/95 px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-100">
+                <Link to={seekerLink} className="btn btn-secondary btn-lg inline-flex items-center justify-center gap-2 bg-white/95 text-slate-950 border-white/20 hover:bg-slate-100">
                   Find Jobs
                 </Link>
               </div>
 
-              <p className="text-sm text-slate-300">5000+ Candidates Placed | Trusted by Leading Teams</p>
+              <p className="text-sm text-amber-100/80">5000+ candidates placed | trusted by leading teams</p>
             </div>
 
-            <div className="relative overflow-hidden rounded-[2rem] bg-slate-800/70 p-6 shadow-soft ring-1 ring-white/10">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(249,115,22,0.18),_transparent_38%)]" />
+            <div className="relative overflow-hidden rounded-[2rem] bg-[#00253D]/95 p-6 shadow-soft ring-1 ring-amber-200/20">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(2,37,61,0.5),_transparent_45%)]" />
               <img
                 src="/job-match.png"
                 alt="Recruiters meeting clients"
-                className="relative h-[420px] w-full rounded-[1.75rem] object-cover shadow-xl ring-1 ring-white/10"
+                className="relative h-[420px] w-full rounded-[1.75rem] object-cover shadow-xl ring-1 ring-amber-100/30"
               />
             </div>
           </div>
