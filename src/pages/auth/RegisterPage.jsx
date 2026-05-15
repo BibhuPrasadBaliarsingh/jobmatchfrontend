@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Mail, Lock, User, Phone, MapPin, Briefcase, Building2 } from 'lucide-react';
+import { Mail, Lock, User, Phone, MapPin, Briefcase } from 'lucide-react';
 import { InputField, Spinner } from '../../components/common/UI';
 import toast from 'react-hot-toast';
 
 export default function RegisterPage() {
   const { register } = useAuth();
   const navigate = useNavigate();
-  const [params] = useSearchParams();
-  const defaultRole = params.get('role') || 'seeker';
 
   const [form, setForm] = useState({
     name: '', email: '', password: '', confirmPassword: '',
-    role: defaultRole, phone: '', location: '', companyName: '',
+    role: 'seeker', phone: '', location: '',
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [logoSrc, setLogoSrc] = useState('/logo.PNG');
 
   useEffect(() => {
-    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logo.PNG');
+    const getLogo = () => (document.documentElement.classList.contains('dark') ? '/logodrak.PNG' : '/logo.png');
     setLogoSrc(getLogo());
 
     const handleThemeChange = (event) => {
-      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logo.PNG');
+      setLogoSrc(event.detail === 'dark' ? '/logodrak.PNG' : '/logo.png');
     };
 
     window.addEventListener('theme-change', handleThemeChange);
@@ -39,7 +37,6 @@ export default function RegisterPage() {
     if (!form.email) e.email = 'Email is required';
     if (!form.password || form.password.length < 6) e.password = 'Min 6 characters';
     if (form.password !== form.confirmPassword) e.confirmPassword = 'Passwords do not match';
-    if (form.role === 'recruiter' && !form.companyName.trim()) e.companyName = 'Company name is required';
     return e;
   };
 
@@ -76,20 +73,10 @@ export default function RegisterPage() {
 
         {/* Role toggle */}
         <div className="card p-1 flex mb-6">
-          {['seeker', 'recruiter'].map((r) => (
-            <button
-              key={r}
-              type="button"
-              onClick={() => setForm(p => ({ ...p, role: r }))}
-              className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium transition-all
-                ${form.role === r ? 'bg-ink-900 text-white shadow-sm' : 'text-ink-500 hover:text-ink-800'}`}
-            >
-              {r === 'seeker' ? <User size={15} /> : <Building2 size={15} />}
-              {r === 'seeker' ? 'Job Seeker' : 'Recruiter'}
-            </button>
-          ))}
-        </div>
-
+            <div className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium transition-all bg-ink-900 text-white shadow-sm">
+              <User size={15} /> Job Seeker
+            </div>
+          </div>
         <div className="card p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
@@ -144,17 +131,6 @@ export default function RegisterPage() {
                 value={form.location}
                 onChange={set('location')}
               />
-              {form.role === 'recruiter' && (
-                <InputField
-                  label="Company name"
-                  icon={Briefcase}
-                  placeholder="Acme Corp"
-                  value={form.companyName}
-                  onChange={set('companyName')}
-                  error={errors.companyName}
-                  className="col-span-2"
-                />
-              )}
             </div>
 
             <button type="submit" disabled={loading} className="btn-primary w-full btn-lg mt-2">

@@ -20,7 +20,7 @@ export default function LogoSlider({
     <section className="bg-white dark:bg-slate-950 py-12">
       <div className="page-container">
         <div className="mb-6 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.32em] text-primary-600">{label}</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.32em] text-[#f4b400]">{label}</p>
           <h2 className="mt-4 text-3xl font-display font-bold text-slate-900 dark:text-slate-100">{title}</h2>
           {description ? (
             <p className="mt-4 text-slate-600 dark:text-slate-300">{description}</p>

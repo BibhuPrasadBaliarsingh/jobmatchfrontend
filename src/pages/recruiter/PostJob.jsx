@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import Sidebar from '../../components/layout/Sidebar';
 import { PageHeader, InputField, SkillInput, Spinner } from '../../components/common/UI';
 import { jobsApi } from '../../services/api';
@@ -10,6 +11,7 @@ const JOB_TYPES = ['full-time', 'part-time', 'contract', 'internship', 'remote']
 
 export default function PostJob() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [form, setForm] = useState({
     title: '', description: '', requiredSkills: [], experienceRequired: 0,
     location: '', jobType: 'full-time', companyName: '',
@@ -38,7 +40,7 @@ export default function PostJob() {
     try {
       await jobsApi.create(form);
       toast.success('Job posted successfully! 🎉');
-      navigate('/recruiter/dashboard');
+      navigate(user?.role === 'admin' ? '/admin/dashboard' : '/recruiter/dashboard');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to post job');
     } finally {
@@ -117,7 +119,13 @@ export default function PostJob() {
           </div>
 
           <div className="flex gap-3">
-            <button type="button" onClick={() => navigate('/recruiter/dashboard')} className="btn-secondary btn-lg flex-1">Cancel</button>
+            <button
+              type="button"
+              onClick={() => navigate(user?.role === 'admin' ? '/admin/dashboard' : '/recruiter/dashboard')}
+              className="btn-secondary btn-lg flex-1"
+            >
+              Cancel
+            </button>
             <button type="submit" disabled={loading} className="btn-primary btn-lg flex-1">
               {loading ? <Spinner /> : 'Post Job'}
             </button>

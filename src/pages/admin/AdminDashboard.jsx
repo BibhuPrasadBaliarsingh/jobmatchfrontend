@@ -36,7 +36,6 @@ export default function AdminDashboard() {
             {/* Stats grid */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
               <StatCard icon={Users} label="Job Seekers" value={data?.stats?.totalSeekers || 0} color="sage" />
-              <StatCard icon={Building2} label="Recruiters" value={data?.stats?.totalRecruiters || 0} color="amber" />
               <StatCard icon={Briefcase} label="Active Jobs" value={data?.stats?.totalJobs || 0} color="ink" />
               <StatCard icon={Zap} label="Total Matches" value={data?.stats?.totalMatches || 0} color="coral" />
             </div>

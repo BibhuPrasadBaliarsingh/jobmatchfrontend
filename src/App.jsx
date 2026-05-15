@@ -21,7 +21,6 @@ import RecruiterCandidates from './pages/recruiter/RecruiterCandidates';
 // Admin pages
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminSeekers from './pages/admin/AdminSeekers';
-import AdminRecruiters from './pages/admin/AdminRecruiters';
 import AdminJobs from './pages/admin/AdminJobs';
 import AdminMatches from './pages/admin/AdminMatches';
 import AdminMatchEngine from './pages/admin/AdminMatchEngine';
@@ -82,8 +81,8 @@ const AppRoutes = () => (
     {/* Admin */}
     <Route path="/admin/dashboard" element={<PrivateRoute role="admin"><AdminDashboard /></PrivateRoute>} />
     <Route path="/admin/seekers" element={<PrivateRoute role="admin"><AdminSeekers /></PrivateRoute>} />
-    <Route path="/admin/recruiters" element={<PrivateRoute role="admin"><AdminRecruiters /></PrivateRoute>} />
     <Route path="/admin/jobs" element={<PrivateRoute role="admin"><AdminJobs /></PrivateRoute>} />
+    <Route path="/admin/post-job" element={<PrivateRoute role="admin"><PostJob /></PrivateRoute>} />
     <Route path="/admin/matches" element={<PrivateRoute role="admin"><AdminMatches /></PrivateRoute>} />
     <Route path="/admin/match-engine" element={<PrivateRoute role="admin"><AdminMatchEngine /></PrivateRoute>} />
 

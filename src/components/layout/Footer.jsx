@@ -18,7 +18,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-slate-950 text-slate-100">
+    <footer className="bg-[#00253D] text-white dark:bg-black dark:text-white">
       <div className="page-container grid gap-8 py-14 lg:grid-cols-5">
         <div className="space-y-4">
           <div className="flex items-center gap-3">

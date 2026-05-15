@@ -24,8 +24,8 @@ const NAV_ITEMS = {
     { to: '/admin/match-engine', icon: Zap, label: 'Match Engine' },
     { to: '/admin/matches', icon: Settings, label: 'All Matches' },
     { to: '/admin/seekers', icon: Search, label: 'Seekers' },
-    { to: '/admin/recruiters', icon: Users, label: 'Recruiters' },
     { to: '/admin/jobs', icon: Briefcase, label: 'Jobs' },
+    { to: '/admin/post-job', icon: FileText, label: 'Post a Job' },
   ],
 };
 
