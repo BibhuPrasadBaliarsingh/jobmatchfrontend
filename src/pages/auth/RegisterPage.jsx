@@ -10,7 +10,7 @@ export default function RegisterPage() {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    name: '', email: '', password: '', confirmPassword: '',
+    name: '', password: '', confirmPassword: '',
     role: 'seeker', phone: '', location: '',
   });
   const [errors, setErrors] = useState({});
@@ -31,10 +31,19 @@ export default function RegisterPage() {
 
   const set = (key) => (e) => setForm(p => ({ ...p, [key]: e.target.value }));
 
+  const isValidPhone = (phone) => {
+    const normalized = phone.replace(/\D/g, '');
+    return /^[6-9]\d{9}$/.test(normalized) && !/(.)\1\1/.test(normalized);
+  };
+
   const validate = () => {
     const e = {};
     if (!form.name.trim()) e.name = 'Name is required';
-    if (!form.email) e.email = 'Email is required';
+    if (!form.phone || !form.phone.trim()) {
+      e.phone = 'Phone number is required';
+    } else if (!isValidPhone(form.phone)) {
+      e.phone = 'Enter a valid 10-digit number starting with 6-9 and no three repeated digits';
+    }
     if (!form.password || form.password.length < 6) e.password = 'Min 6 characters';
     if (form.password !== form.confirmPassword) e.confirmPassword = 'Passwords do not match';
     return e;
@@ -79,7 +88,7 @@ export default function RegisterPage() {
           </div>
         <div className="card p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4">
               <InputField
                 label="Full name"
                 icon={User}
@@ -87,20 +96,25 @@ export default function RegisterPage() {
                 value={form.name}
                 onChange={set('name')}
                 error={errors.name}
-                className="col-span-2"
+                className="col-span-1"
               />
+
               <InputField
-                label="Email"
-                type="email"
-                icon={Mail}
-                placeholder="you@example.com"
-                value={form.email}
-                onChange={set('email')}
-                error={errors.email}
-                className="col-span-2"
+                label="Phone number"
+                icon={Phone}
+                placeholder="9876543210"
+                value={form.phone}
+                onChange={(e) => {
+                  const digits = e.target.value.replace(/\D/g, '').slice(0, 10);
+                  setForm((p) => ({ ...p, phone: digits }));
+                }}
+                error={errors.phone}
+                inputMode="numeric"
+                maxLength={10}
               />
+
               <InputField
-                label="Password"
+                label="Enter password"
                 type="password"
                 icon={Lock}
                 placeholder="Min 6 characters"
@@ -108,8 +122,9 @@ export default function RegisterPage() {
                 onChange={set('password')}
                 error={errors.password}
               />
+
               <InputField
-                label="Confirm password"
+                label="Re-enter password"
                 type="password"
                 icon={Lock}
                 placeholder="Repeat password"
@@ -117,24 +132,10 @@ export default function RegisterPage() {
                 onChange={set('confirmPassword')}
                 error={errors.confirmPassword}
               />
-              <InputField
-                label="Phone (optional)"
-                icon={Phone}
-                placeholder="+91 98765 43210"
-                value={form.phone}
-                onChange={set('phone')}
-              />
-              <InputField
-                label="Location (optional)"
-                icon={MapPin}
-                placeholder="Bangalore, India"
-                value={form.location}
-                onChange={set('location')}
-              />
             </div>
 
             <button type="submit" disabled={loading} className="btn-primary w-full btn-lg mt-2">
-              {loading ? <Spinner /> : 'Create account'}
+              {loading ? <Spinner /> : 'Create profile'}
             </button>
           </form>
         </div>

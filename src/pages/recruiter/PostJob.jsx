@@ -17,11 +17,23 @@ export default function PostJob() {
     location: '', jobType: 'full-time', companyName: '',
     salaryRange: { min: '', max: '', currency: 'INR' },
   });
+  const [logoFile, setLogoFile] = useState(null);
+  const [logoPreview, setLogoPreview] = useState('');
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
   const set = k => e => setForm(p => ({ ...p, [k]: e.target.value }));
   const setSalary = k => e => setForm(p => ({ ...p, salaryRange: { ...p.salaryRange, [k]: e.target.value } }));
+
+  const handleLogoChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setLogoFile(file);
+      const reader = new FileReader();
+      reader.onload = (event) => setLogoPreview(event.target?.result || '');
+      reader.readAsDataURL(file);
+    }
+  };
 
   const validate = () => {
     const e = {};
@@ -38,7 +50,22 @@ export default function PostJob() {
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setLoading(true);
     try {
-      await jobsApi.create(form);
+      if (logoFile) {
+        const formData = new FormData();
+        Object.keys(form).forEach(key => {
+          if (key === 'salaryRange') {
+            formData.append('salaryRange', JSON.stringify(form.salaryRange));
+          } else if (key === 'requiredSkills') {
+            formData.append('requiredSkills', JSON.stringify(form.requiredSkills));
+          } else {
+            formData.append(key, form[key]);
+          }
+        });
+        formData.append('logo', logoFile);
+        await jobsApi.create(formData);
+      } else {
+        await jobsApi.create(form);
+      }
       toast.success('Job posted successfully! 🎉');
       navigate(user?.role === 'admin' ? '/admin/dashboard' : '/recruiter/dashboard');
     } catch (err) {
@@ -60,6 +87,32 @@ export default function PostJob() {
             <div className="space-y-4">
               <InputField label="Job Title" value={form.title} onChange={set('title')} placeholder="e.g. Senior React Developer" error={errors.title} />
               <InputField label="Company Name (optional)" value={form.companyName} onChange={set('companyName')} placeholder="Leave blank to use your profile name" />
+              <div>
+                <label className="label">Company Logo (optional)</label>
+                <div className="flex gap-4">
+                  <div className="flex-1">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleLogoChange}
+                      className="input cursor-pointer"
+                    />
+                    <p className="text-xs text-slate-500 mt-2">PNG, JPG, or WebP (max 5MB)</p>
+                  </div>
+                  {logoPreview && (
+                    <div className="flex items-center gap-2">
+                      <img src={logoPreview} alt="Logo preview" className="h-12 w-12 rounded-lg object-cover" />
+                      <button
+                        type="button"
+                        onClick={() => { setLogoFile(null); setLogoPreview(''); }}
+                        className="text-xs text-coral-600 hover:text-coral-700 font-medium"
+                      >
+                        Clear
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
               <div>
                 <label className="label">Description *</label>
                 <textarea

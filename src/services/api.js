@@ -8,11 +8,27 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
+export const resolveAssetUrl = (assetPath) => {
+  if (!assetPath) return assetPath;
+  if (/^https?:\/\//i.test(assetPath)) return assetPath;
+
+  const origin = import.meta.env.VITE_BACKEND_ORIGIN || '';
+  if (!origin) return assetPath;
+
+  const normalizedOrigin = origin.endsWith('/') ? origin.slice(0, -1) : origin;
+  return `${normalizedOrigin}${assetPath}`;
+};
+
 // Attach JWT token to every request
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('jm_token');
     if (token) config.headers.Authorization = `Bearer ${token}`;
+    
+    // Don't set Content-Type for FormData (let browser handle it)
+    if (config.data instanceof FormData) {
+      delete config.headers['Content-Type'];
+    }
     return config;
   },
   (error) => Promise.reject(error)
@@ -23,8 +39,10 @@ api.interceptors.response.use(
   (res) => res,
   (error) => {
     if (error.response?.status === 401) {
+      // Remove stored token but do not force a redirect here.
+      // Let the UI logic handle navigation so we can inspect the error.
       localStorage.removeItem('jm_token');
-      window.location.href = '/login';
+      console.warn('API: 401 response received — token removed (no redirect)');
     }
     return Promise.reject(error);
   }

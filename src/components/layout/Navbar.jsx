@@ -52,6 +52,13 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <Link
+            to="/register?role=seeker"
+            className="btn btn-secondary btn-sm hidden md:inline-flex text-sm"
+          >
+            Create New Profile
+          </Link>
+
+          <Link
             to="/login"
             className="btn btn-primary btn-sm hidden md:inline-flex text-sm"
           >
@@ -90,6 +97,14 @@ export default function Navbar() {
               className="mt-2 text-center btn btn-primary rounded-2xl text-sm font-medium"
             >
               Login
+            </Link>
+
+            <Link
+              to="/register?role=seeker"
+              onClick={() => setOpen(false)}
+              className="mt-2 text-center btn btn-secondary rounded-2xl text-sm font-medium"
+            >
+              Create New Profile
             </Link>
           </div>
         </div>

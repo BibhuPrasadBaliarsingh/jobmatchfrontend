@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 
@@ -24,14 +24,18 @@ import AdminSeekers from './pages/admin/AdminSeekers';
 import AdminJobs from './pages/admin/AdminJobs';
 import AdminMatches from './pages/admin/AdminMatches';
 import AdminMatchEngine from './pages/admin/AdminMatchEngine';
+import AdminSettings from './pages/admin/AdminSettings';
 
 // Common
 import NotFound from './pages/NotFound';
 import LandingPage from './pages/LandingPage';
+import JobsPage from './pages/JobsPage';
+import JobDetails from './pages/JobDetails';
 import AboutPage from './pages/AboutPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import LoadingScreen from './components/common/LoadingScreen';
+import Sidebar from './components/layout/Sidebar';
 import ThemeToggle from './components/common/ThemeToggle';
 
 // ─── Route Guards ─────────────────────────────────────────────────────────────
@@ -63,9 +67,12 @@ const AppRoutes = () => (
     <Route path="/" element={<LandingPage />} />
     <Route path="/login" element={<PublicOnlyRoute><LoginPage /></PublicOnlyRoute>} />
     <Route path="/register" element={<PublicOnlyRoute><RegisterPage /></PublicOnlyRoute>} />
+    <Route path="/jobs" element={<JobsPage />} />
+    <Route path="/jobs/:id" element={<JobDetails />} />
 
     {/* Seeker */}
     <Route path="/seeker/dashboard" element={<PrivateRoute role="seeker"><SeekerDashboard /></PrivateRoute>} />
+    <Route path="/seeker/jobs" element={<PrivateRoute role="seeker"><Sidebar><JobsPage /></Sidebar></PrivateRoute>} />
     <Route path="/seeker/profile" element={<PrivateRoute role="seeker"><SeekerProfile /></PrivateRoute>} />
     <Route path="/seeker/opportunities" element={<PrivateRoute role="seeker"><SeekerOpportunities /></PrivateRoute>} />
     <Route path="/about" element={<AboutPage />} />
@@ -74,6 +81,7 @@ const AppRoutes = () => (
 
     {/* Recruiter */}
     <Route path="/recruiter/dashboard" element={<PrivateRoute role="recruiter"><RecruiterDashboard /></PrivateRoute>} />
+    <Route path="/recruiter/jobs" element={<PrivateRoute role="recruiter"><Sidebar><JobsPage /></Sidebar></PrivateRoute>} />
     <Route path="/recruiter/profile" element={<PrivateRoute role="recruiter"><RecruiterProfile /></PrivateRoute>} />
     <Route path="/recruiter/post-job" element={<PrivateRoute role="recruiter"><PostJob /></PrivateRoute>} />
     <Route path="/recruiter/candidates" element={<PrivateRoute role="recruiter"><RecruiterCandidates /></PrivateRoute>} />
@@ -85,6 +93,7 @@ const AppRoutes = () => (
     <Route path="/admin/post-job" element={<PrivateRoute role="admin"><PostJob /></PrivateRoute>} />
     <Route path="/admin/matches" element={<PrivateRoute role="admin"><AdminMatches /></PrivateRoute>} />
     <Route path="/admin/match-engine" element={<PrivateRoute role="admin"><AdminMatchEngine /></PrivateRoute>} />
+    <Route path="/admin/settings" element={<PrivateRoute role="admin"><AdminSettings /></PrivateRoute>} />
 
     <Route path="*" element={<NotFound />} />
   </Routes>
@@ -93,7 +102,12 @@ const AppRoutes = () => (
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <BrowserRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
         <AppRoutes />
         <ThemeToggle />
         <Toaster

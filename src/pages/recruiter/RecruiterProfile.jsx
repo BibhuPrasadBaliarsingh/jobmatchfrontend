@@ -23,13 +23,14 @@ export default function RecruiterProfile() {
 
   const set = k => e => setForm(p => ({ ...p, [k]: e.target.value }));
 
-  const handleSubmit = async e => {
+  const handleSaveAndSendWhatsApp = async e => {
     e.preventDefault();
     setLoading(true);
     try {
       const res = await recruiterApi.updateProfile(form);
       updateUser(res.data.data);
       toast.success('Company profile updated!');
+      handleSendWhatsApp(res.data.data);
     } catch (err) {
       toast.error(err.response?.data?.message || 'Update failed');
     } finally {
@@ -37,14 +38,15 @@ export default function RecruiterProfile() {
     }
   };
 
-  const handleSendWhatsApp = () => {
+  const handleSendWhatsApp = (profileDataprofileData) => {
+    const profile = profileData || form;
     const message = [
       'Hi, here is our full JobMatch company profile data:',
-      `Contact Name: ${form.name || user?.name || 'N/A'}`,
-      `Company Name: ${form.companyName || 'N/A'}`,
-      `Phone: ${form.phone || 'N/A'}`,
-      `Location: ${form.location || 'N/A'}`,
-      `Company Description: ${form.companyDescription || 'N/A'}`,
+      `Contact Name: ${profile.name || user?.name || 'N/A'}`,
+      `Company Name: ${profile.companyName || 'N/A'}`,
+      `Phone: ${profile.phone || 'N/A'}`,
+      `Location: ${profile.location || 'N/A'}`,
+      `Company Description: ${profile.companyDescription || 'N/A'}`,
     ].filter(Boolean).join('\n');
 
     const url = `https://wa.me/7655047671?text=${encodeURIComponent(message)}`;
@@ -55,7 +57,7 @@ export default function RecruiterProfile() {
     <Sidebar>
       <div className="p-6 lg:p-8 max-w-2xl mx-auto">
         <PageHeader title="Company Profile" subtitle="Keep your company information updated for better candidate matching." />
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSaveAndSendWhatsApp} className="space-y-6">
           <div className="card p-6">
             <h2 className="font-display font-semibold text-ink-900 dark:text-slate-100 mb-5 flex items-center gap-2"><Building2 size={18} /> Company Details</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -70,15 +72,8 @@ export default function RecruiterProfile() {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-3">
-            <button type="submit" disabled={loading} className="btn-primary btn-lg flex-1 w-full sm:w-auto">
-              {loading ? <Spinner /> : 'Save Profile'}
-            </button>
-            <button
-              type="button"
-              onClick={handleSendWhatsApp}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-7 py-3.5 text-base font-medium text-white transition-all duration-150 hover:bg-emerald-700 active:scale-95 w-full sm:w-auto"
-            >
-              <Send size={16} /> Send to WhatsApp
+            <button type="submit" disabled={loading} className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-500 px-7 py-3.5 text-base font-medium text-white transition-all duration-150 hover:bg-amber-600 active:scale-95 w-full sm:w-auto">
+              {loading ? <Spinner /> : <><Send size={16} /> Save & Send to WhatsApp</>}
             </button>
           </div>
         </form>

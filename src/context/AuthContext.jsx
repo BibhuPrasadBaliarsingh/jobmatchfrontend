@@ -1,7 +1,25 @@
 import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 import api from '../services/api';
 
-const AuthContext = createContext(null);
+const missingProvider = (fn) => async () => {
+  throw new Error(`AuthContext: ${fn} called but <AuthProvider> is missing`);
+};
+
+const AuthContext = createContext({
+  user: null,
+  token: null,
+  loading: false,
+  error: null,
+  login: missingProvider('login'),
+  register: missingProvider('register'),
+  logout: () => {
+    throw new Error('AuthContext: logout called but <AuthProvider> is missing');
+  },
+  updateUser: () => {
+    throw new Error('AuthContext: updateUser called but <AuthProvider> is missing');
+  },
+  loadUser: missingProvider('loadUser'),
+});
 
 const initialState = {
   user: null,
@@ -37,7 +55,9 @@ export const AuthProvider = ({ children }) => {
       return;
     }
     try {
+      console.debug('[Auth] loadUser: token found, fetching /auth/me');
       const res = await api.get('/auth/me');
+      console.debug('[Auth] loadUser: /auth/me response', res.data);
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: { user: res.data.data, token },
@@ -52,13 +72,20 @@ export const AuthProvider = ({ children }) => {
     loadUser();
   }, [loadUser]);
 
-  const login = async (email, password) => {
-    const res = await api.post('/auth/login', { email, password });
-    const { token, user } = res.data.data;
-    localStorage.setItem('jm_token', token);
-    dispatch({ type: 'LOGIN_SUCCESS', payload: { user, token } });
-    await loadUser();
-    return user;
+  const login = async (authData, password) => {
+    const payload = typeof authData === 'string' ? { email: authData, password } : authData;
+    try {
+      const res = await api.post('/auth/login', payload);
+      console.debug('[Auth] login response', res.data);
+      const { token, user } = res.data.data;
+      localStorage.setItem('jm_token', token);
+      console.debug('[Auth] login: token saved to localStorage');
+      dispatch({ type: 'LOGIN_SUCCESS', payload: { user, token } });
+      return user;
+    } catch (err) {
+      console.error('[Auth] login error', err.response?.data || err.message || err);
+      throw err;
+    }
   };
 
   const register = async (userData) => {
@@ -66,7 +93,6 @@ export const AuthProvider = ({ children }) => {
     const { token, user } = res.data.data;
     localStorage.setItem('jm_token', token);
     dispatch({ type: 'LOGIN_SUCCESS', payload: { user, token } });
-    await loadUser();
     return user;
   };
 
@@ -85,7 +111,5 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => {
-  const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error('useAuth must be used within AuthProvider');
-  return ctx;
+  return useContext(AuthContext);
 };

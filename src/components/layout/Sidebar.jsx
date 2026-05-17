@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
   LayoutDashboard, User, Briefcase, Bell, LogOut,
   ChevronLeft, ChevronRight, Users, Settings, Menu, X,
-  Zap, FileText, Search
+  Zap, FileText, Search, Shield
 } from 'lucide-react';
 
 const NAV_ITEMS = {
   seeker: [
     { to: '/seeker/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { to: '/seeker/jobs', icon: Briefcase, label: 'Jobs' },
     { to: '/seeker/opportunities', icon: Briefcase, label: 'Opportunities' },
     { to: '/seeker/profile', icon: User, label: 'My Profile' },
   ],
   recruiter: [
     { to: '/recruiter/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { to: '/recruiter/jobs', icon: Briefcase, label: 'Jobs' },
     { to: '/recruiter/post-job', icon: FileText, label: 'Post a Job' },
     { to: '/recruiter/candidates', icon: Users, label: 'Candidates' },
     { to: '/recruiter/profile', icon: User, label: 'Company Profile' },
@@ -26,6 +28,7 @@ const NAV_ITEMS = {
     { to: '/admin/seekers', icon: Search, label: 'Seekers' },
     { to: '/admin/jobs', icon: Briefcase, label: 'Jobs' },
     { to: '/admin/post-job', icon: FileText, label: 'Post a Job' },
+    { to: '/admin/settings', icon: Shield, label: 'Settings' },
   ],
 };
 
@@ -162,12 +165,10 @@ export default function Sidebar({ children }) {
           <button onClick={() => setMobileOpen(true)} className="btn-ghost p-1.5 rounded-lg">
             <Menu size={20} />
           </button>
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-ink-900 rounded-md flex items-center justify-center">
-              <span className="text-white font-display font-bold text-xs">SDS</span>
-            </div>
-            <span className="font-display font-bold text-ink-900 dark:text-slate-100">Super Deals Staffing</span>
-          </div>
+          <Link to="/" className="flex items-center gap-3">
+            <img src="/logo.png" alt="Super Deals Staffing" className="h-10 w-10 rounded-2xl object-cover" />
+            <span className="font-display font-bold text-ink-900 dark:text-slate-100">Super Deals</span>
+          </Link>
           <div className="w-8" />
         </header>
 

@@ -19,13 +19,13 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#00253D] text-white dark:bg-black dark:text-white">
-      <div className="page-container grid gap-8 py-14 lg:grid-cols-5">
+      <div className="page-container grid py-14 lg:grid-cols-5">
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <img src={logoSrc} alt="Super Deals" className="h-10 w-10 rounded-xl object-cover " />
             <p className="text-sm uppercase tracking-[0.24em] text-slate-400">Super Deals</p>
           </div>
-          <p className="max-w-sm text-sm leading-7 text-slate-300">Super Deals Staffing connects businesses with reliable talent and helps job seekers grow new careers with certainty.</p>
+          <p className="max-w-sm text-sm leading-7 text-slate-300">Super Deals Staffing is a trusted staffing and recruitment agency providing hiring and workforce solutions for businesses and career opportunities for job seekers across multiple industries. We specialize in permanent staffing, temporary staffing, and professional recruitment services.</p>
         </div>
 
         <div>
@@ -80,15 +80,7 @@ export default function Footer() {
             >
               <Linkedin size={18} />
             </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Twitter"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-700 bg-slate-900 transition hover:border-white hover:text-white"
-            >
-              <Twitter size={18} />
-            </a>
+            
             <a
               href="https://www.facebook.com"
               target="_blank"

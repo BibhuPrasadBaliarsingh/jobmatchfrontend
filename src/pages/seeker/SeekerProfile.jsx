@@ -36,6 +36,9 @@ export default function SeekerProfile() {
   const [form, setForm] = useState({
     name: '', phone: '', location: '', bio: '',
     skills: [], experienceYears: 0, experienceDescription: '', preferredRoles: [],
+    gender: '', employmentType: 'any', district: '', state: '', dateOfBirth: '',
+    highestQualification: '', applyFor: '', preferredJobLocation: '', isFresher: false,
+    expectedSalary: '', hasBike: false, hasDrivingLicense: false,
   });
   const [loading, setLoading] = useState(false);
   const [resumeFile, setResumeFile] = useState(null);
@@ -52,6 +55,18 @@ export default function SeekerProfile() {
         experienceYears: user.experienceYears || 0,
         experienceDescription: user.experienceDescription || '',
         preferredRoles: user.preferredRoles || [],
+        gender: user.gender || '',
+        employmentType: user.employmentType || 'any',
+        district: user.district || '',
+        state: user.state || '',
+        dateOfBirth: user.dateOfBirth ? (new Date(user.dateOfBirth)).toISOString().slice(0,10) : '',
+        highestQualification: user.highestQualification || '',
+        applyFor: user.applyFor || '',
+        preferredJobLocation: user.preferredJobLocation || '',
+        isFresher: !!user.isFresher,
+        expectedSalary: user.expectedSalary || '',
+        hasBike: !!user.hasBike,
+        hasDrivingLicense: !!user.hasDrivingLicense,
       });
     }
   }, [user]);
@@ -75,13 +90,14 @@ export default function SeekerProfile() {
   });
   const completeness = Math.round((filledFields.length / fields.length) * 100);
 
-  const handleSubmit = async (e) => {
+  const handleSaveAndSendWhatsApp = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
       const res = await seekerApi.updateProfile(form);
       updateUser(res.data.data);
       toast.success('Profile updated!');
+      handleSendWhatsApp(res.data.data);
     } catch (err) {
       toast.error(err.response?.data?.message || 'Update failed');
     } finally {
@@ -124,18 +140,19 @@ export default function SeekerProfile() {
     }
   };
 
-  const handleSendWhatsApp = () => {
+  const handleSendWhatsApp = (profileData) => {
+    const profile = profileData || form;
     const message = [
       'Hi, here is my full JobMatch profile data:',
-      `Name: ${form.name || user?.name || 'N/A'}`,
-      `Phone: ${form.phone || 'N/A'}`,
-      `Location: ${form.location || 'N/A'}`,
-      `Bio: ${form.bio || 'N/A'}`,
-      `Skills: ${form.skills?.length ? form.skills.join(', ') : 'N/A'}`,
-      `Experience Years: ${form.experienceYears ?? 'N/A'}`,
-      `Experience Description: ${form.experienceDescription || 'N/A'}`,
-      `Preferred Roles: ${form.preferredRoles?.length ? form.preferredRoles.join(', ') : 'N/A'}`,
-      `Resume: ${user?.resumeUrl ? user.resumeUrl : 'Not uploaded'}`,
+      `Name: ${profile.name || user?.name || 'N/A'}`,
+      `Phone: ${profile.phone || 'N/A'}`,
+      `Location: ${profile.location || 'N/A'}`,
+      `Bio: ${profile.bio || 'N/A'}`,
+      `Skills: ${profile.skills?.length ? profile.skills.join(', ') : 'N/A'}`,
+      `Experience Years: ${profile.experienceYears ?? 'N/A'}`,
+      `Experience Description: ${profile.experienceDescription || 'N/A'}`,
+      `Preferred Roles: ${profile.preferredRoles?.length ? profile.preferredRoles.join(', ') : 'N/A'}`,
+      `Resume: ${profile.resumeUrl || user?.resumeUrl || 'Not uploaded'}`,
     ].filter(Boolean).join('\n');
 
     const url = `https://wa.me/7655047671?text=${encodeURIComponent(message)}`;
@@ -170,7 +187,7 @@ export default function SeekerProfile() {
           )}
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSaveAndSendWhatsApp} className="space-y-6">
           {/* Resume */}
           <div className="card p-6">
             <h2 className="font-display font-semibold text-ink-900 dark:text-slate-100 mb-2 flex items-center gap-2">
@@ -227,6 +244,19 @@ export default function SeekerProfile() {
               <InputField label="Full Name" icon={User} value={form.name} onChange={set('name')} placeholder="Jane Smith" className="sm:col-span-2" />
               <InputField label="Phone" icon={Phone} value={form.phone} onChange={set('phone')} placeholder="+91 98765 43210" />
               <InputField label="Location" icon={MapPin} value={form.location} onChange={set('location')} placeholder="Bangalore, India" />
+              <div>
+                <label className="label">Gender</label>
+                <select className="input" value={form.gender} onChange={(e) => setForm(p => ({ ...p, gender: e.target.value }))}>
+                  <option value="">Select</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label className="label">Date of Birth</label>
+                <input type="date" className="input" value={form.dateOfBirth} onChange={(e) => setForm(p => ({ ...p, dateOfBirth: e.target.value }))} />
+              </div>
               <div className="sm:col-span-2">
                 <label className="label">Bio (optional)</label>
                 <textarea
@@ -236,6 +266,64 @@ export default function SeekerProfile() {
                   value={form.bio}
                   onChange={set('bio')}
                 />
+              </div>
+            </div>
+          </div>
+
+          {/* Additional details */}
+          <div className="card p-6">
+            <h2 className="font-display font-semibold text-ink-900 dark:text-slate-100 mb-5 flex items-center gap-2">
+              <FileText size={18} /> Additional Details
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="label">Employment Type</label>
+                <select className="input" value={form.employmentType} onChange={(e) => setForm(p => ({ ...p, employmentType: e.target.value }))}>
+                  <option value="any">Any</option>
+                  <option value="full-time">Full-time</option>
+                  <option value="part-time">Part-time</option>
+                  <option value="contract">Contract</option>
+                  <option value="internship">Internship</option>
+                </select>
+              </div>
+
+              <InputField label="District" icon={MapPin} value={form.district} onChange={(e) => setForm(p => ({ ...p, district: e.target.value }))} />
+              <InputField label="State" icon={MapPin} value={form.state} onChange={(e) => setForm(p => ({ ...p, state: e.target.value }))} />
+
+              <div>
+                <label className="label">Highest Qualification</label>
+                <select className="input" value={form.highestQualification} onChange={(e) => setForm(p => ({ ...p, highestQualification: e.target.value }))}>
+                  <option value="">Select</option>
+                  <option value="10th">10th</option>
+                  <option value="12th">12th</option>
+                  <option value="graduation">Graduation</option>
+                  <option value="postgraduation">Post Graduation</option>
+                  <option value="diploma">Diploma</option>
+                </select>
+              </div>
+
+              <InputField label="Apply For (role)" icon={Briefcase} value={form.applyFor} onChange={(e) => setForm(p => ({ ...p, applyFor: e.target.value }))} />
+
+              <InputField label="Preferred Job Location" icon={MapPin} value={form.preferredJobLocation} onChange={(e) => setForm(p => ({ ...p, preferredJobLocation: e.target.value }))} />
+
+              <div className="flex items-center gap-3">
+                <label className="label">Fresher?</label>
+                <input type="checkbox" checked={form.isFresher} onChange={(e) => setForm(p => ({ ...p, isFresher: e.target.checked }))} />
+              </div>
+
+              <div>
+                <label className="label">Expected Salary</label>
+                <input className="input" value={form.expectedSalary} onChange={(e) => setForm(p => ({ ...p, expectedSalary: e.target.value }))} placeholder="e.g., 15000" />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <label className="label">Have Bike?</label>
+                <input type="checkbox" checked={form.hasBike} onChange={(e) => setForm(p => ({ ...p, hasBike: e.target.checked }))} />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <label className="label">Driving License?</label>
+                <input type="checkbox" checked={form.hasDrivingLicense} onChange={(e) => setForm(p => ({ ...p, hasDrivingLicense: e.target.checked }))} />
               </div>
             </div>
           </div>
@@ -303,15 +391,8 @@ export default function SeekerProfile() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3">
-            <button type="submit" disabled={loading} className="btn-primary btn-lg flex-1 w-full sm:w-auto">
-              {loading ? <Spinner /> : 'Save Profile'}
-            </button>
-            <button
-              type="button"
-              onClick={handleSendWhatsApp}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-7 py-3.5 text-base font-medium text-white transition-all duration-150 hover:bg-emerald-700 active:scale-95"
-            >
-              <Send size={16} /> Send to WhatsApp
+            <button type="submit" disabled={loading} className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-500 px-7 py-3.5 text-base font-medium text-white transition-all duration-150 hover:bg-amber-600 active:scale-95 w-full sm:w-auto">
+              {loading ? <Spinner /> : <><Send size={16} /> Save & Send to WhatsApp</>}
             </button>
           </div>
         </form>

@@ -25,19 +25,21 @@ const reasons = [
 ];
 
 const industries = [
-  'IT & Software',
+  'Information Technology (IT)',
   'Healthcare',
-  'Manufacturing',
-  'Retail',
-  'Logistics',
-  'Finance',
+  'Retail & Sales',
+  'Logistics & Supply Chain',
+  'Customer Support',
+  'Finance & Accounting',
+  'Administration',
   'Hospitality',
-  'Telecom',
+  'Manufacturing',
+  'BPO & Call Center',
 ];
 
 const stats = [
-  { value: '5000+', label: 'Candidates Placed' },
-  { value: '200+', label: 'Hiring Partners' },
+  { value: '500+', label: 'Candidates Placed' },
+  { value: '50+', label: 'Hiring Partners' },
   { value: '10+', label: 'Industries Served' },
   { value: '95%', label: 'Client Satisfaction' },
 ];
@@ -45,6 +47,25 @@ const stats = [
 const testimonials = [
   { quote: 'Super Deals Staffing helped us hire quality candidates quickly.', author: 'Asha N., HR Director' },
   { quote: 'Professional team with fast response and excellent service.', author: 'Rohan K., Operations Lead' },
+];
+
+const faqs = [
+  {
+    question: 'How does Super Deals Staffing help employers?',
+    answer: 'We help businesses find qualified candidates quickly through professional recruitment and staffing solutions.',
+  },
+  {
+    question: 'Are job opportunities available for freshers?',
+    answer: 'Yes, we provide job openings for both freshers and experienced professionals across multiple industries.',
+  },
+  {
+    question: 'Do you offer temporary staffing services?',
+    answer: 'Yes, we provide temporary, contract, and permanent staffing solutions based on company requirements.',
+  },
+  {
+    question: 'How can I apply for jobs?',
+    answer: 'Candidates can apply directly through our website or contact our recruitment team for assistance.',
+  },
 ];
 
 export default function LandingPage() {
@@ -64,35 +85,35 @@ export default function LandingPage() {
 
               <div className="space-y-6 max-w-3xl">
                 <p className="text-sm uppercase tracking-[0.32em] text-amber-300">Staffing & workforce solutions</p>
-                <h1 className="text-5xl font-display font-bold tracking-tight text-white sm:text-6xl">
-                  Right Talent. Right Time. Right Results.
-                </h1>
-                <p className="text-xl font-medium text-amber-100/90">I’m always with you</p>
-                <p className="max-w-2xl text-lg leading-9 text-amber-100/80">
-                  Looking for a manpower staffing service provider across Odisha?
-                  We provide all types of manpower services across the state, helping you solve hiring challenges within 24 working hours.
-                </p>
+                  <h1 className="text-5xl font-display font-bold tracking-tight text-white sm:text-6xl">
+                    Find your dream job here
+                  </h1>
+                  <p className="text-xl font-medium text-amber-100/90">Super Deals Staffing helps job seekers find the right opportunities quickly.</p>
+                  <p className="max-w-2xl text-lg leading-9 text-amber-100/80">
+                    Super Deals Staffing helps job seekers find the right opportunities and connects companies with skilled talent quickly and efficiently. Try our AI matching engine to discover roles tailored to your profile.
+                  </p>
               </div>
 
               <div className="flex flex-col gap-4 sm:flex-row">
-                <Link to={adminLink} className="btn btn-primary btn-lg inline-flex items-center justify-center gap-2">
-                  Hire Talent
+                <Link to="/jobs" className="btn btn-primary btn-lg inline-flex items-center justify-center gap-2">
+                  Explore All jobs
                   <ArrowRight size={18} />
                 </Link>
                 <Link to={seekerLink} className="btn btn-secondary btn-lg inline-flex items-center justify-center gap-2 bg-white/95 text-slate-950 border-white/20 hover:bg-slate-100">
-                  Find Jobs
+                  Upload Resume
                 </Link>
               </div>
 
               <p className="text-sm text-amber-100/80">5000+ candidates placed | trusted by leading teams</p>
             </div>
 
-            <div className="relative overflow-hidden rounded-[2rem] bg-[#00253D]/95 p-6 shadow-soft ring-1 ring-amber-200/20">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(2,37,61,0.5),_transparent_45%)]" />
+            <div className="relative rounded-[2rem] bg-[#00253D]/95 p-6 shadow-soft ring-1 ring-amber-200/20">
+              <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_top,_rgba(2,37,61,0.28),_transparent_45%)]" />
               <img
                 src="/job-match.png"
                 alt="Recruiters meeting clients"
-                className="relative h-[420px] w-full rounded-[1.75rem] object-cover shadow-xl ring-1 ring-amber-100/30"
+                className="relative z-10 w-full rounded-[1.75rem] object-contain shadow-xl ring-1 ring-amber-100/30"
+                style={{ maxHeight: '520px' }}
               />
             </div>
           </div>
@@ -148,8 +169,8 @@ export default function LandingPage() {
         <section className="bg-slate-50 dark:bg-slate-900">
           <div className="page-container py-20">
             <div className="mx-auto mb-12 max-w-2xl text-center">
-              <p className="text-sm uppercase tracking-[0.32em] text-[#f4b400]">Serving Diverse Industries</p>
-              <h2 className="mt-4 text-3xl font-display font-bold text-slate-950 dark:text-white">Serving Diverse Industries</h2>
+              <p className="text-sm uppercase tracking-[0.32em] text-[#f4b400]">Industries We Serve</p>
+              <h2 className="mt-4 text-3xl font-display font-bold text-slate-950 dark:text-white">Industries We Serve</h2>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -221,6 +242,30 @@ export default function LandingPage() {
                 <p className="mt-6 font-semibold text-slate-950 dark:text-white">{item.author}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="bg-slate-50 dark:bg-slate-900">
+          <div className="page-container py-20">
+            <div className="mx-auto mb-12 max-w-2xl text-center">
+              <p className="text-sm uppercase tracking-[0.32em] text-[#f4b400]">Frequently Asked Questions</p>
+              <h2 className="mt-4 text-3xl font-display font-bold text-slate-950 dark:text-white">Frequently Asked Questions</h2>
+              <p className="mt-4 text-slate-600 dark:text-slate-300">Find answers to common questions about our staffing services.</p>
+            </div>
+
+            <div className="mx-auto max-w-3xl space-y-4">
+              {faqs.map((faq, idx) => (
+                <details key={idx} className="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-950 group cursor-pointer">
+                  <summary className="flex items-center justify-between font-semibold text-slate-950 dark:text-white list-none">
+                    {faq.question}
+                    <span className="ml-4 text-[#f4b400] transition group-open:rotate-180">
+                      ▼
+                    </span>
+                  </summary>
+                  <p className="mt-4 text-slate-600 dark:text-slate-300 text-sm leading-7">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 
