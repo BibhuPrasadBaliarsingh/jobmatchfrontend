@@ -104,7 +104,7 @@ export default function LandingPage() {
                 </Link>
               </div>
 
-              <p className="text-sm text-amber-100/80">5000+ candidates placed | trusted by leading teams</p>
+              <p className="text-sm text-amber-100/80">500+ candidates placed | trusted by leading teams</p>
             </div>
 
             <div className="relative rounded-[2rem] bg-[#00253D]/95 p-6 shadow-soft ring-1 ring-amber-200/20">

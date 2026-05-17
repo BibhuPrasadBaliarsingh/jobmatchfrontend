@@ -5,8 +5,8 @@ import LogoSlider from '../components/layout/LogoSlider';
 import { Briefcase, CheckCircle2, Users } from 'lucide-react';
 
 const stats = [
-  { value: '5,000+', label: 'Candidates Placed' },
-  { value: '200+', label: 'Hiring Partners' },
+  { value: '500+', label: 'Candidates Placed' },
+  { value: '50+', label: 'Hiring Partners' },
   { value: '10+', label: 'Industries Served' },
   { value: '95%', label: 'Client Satisfaction' },
 ];
